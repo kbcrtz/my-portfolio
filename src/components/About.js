@@ -1,5 +1,5 @@
 import React from "react";
-import profileImage from '/Users/kbcrtz/GitRepos/my-portfolio/src/profileImage.jpeg'
+import profileImage from '../profileImage.jpeg'
 
 const About = () => {
     return (
