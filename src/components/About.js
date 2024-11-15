@@ -5,7 +5,7 @@ const About = () => {
         <section id="about" style={styles.section}>
             <h2>About Me</h2>
             <p>
-                Hey, I'm Kobe Cortez, 
+                Hey, I'm Kobe Cortez, and this is my portfolio.
             </p>
         </section>
     );
