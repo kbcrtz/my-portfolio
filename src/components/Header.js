@@ -17,6 +17,7 @@ const styles = {
     header: {
         display: 'flex',
         justifyContent: 'space-between',
+        alignItems: 'center',
         padding: '20px',
         backgroundColor: '#333',
         color: '#fff'
