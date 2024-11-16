@@ -22,6 +22,7 @@ const Header = () => {
 const styles = {
     header: {
         display: 'flex',
+        alignItems:'center',
         justifyContent: 'space-between',
         padding: '20px',
         backgroundColor: '#fff',
@@ -39,6 +40,7 @@ const styles = {
     link:{
         color: 'inherit',
         textDecoration: 'none',
+        textAlign:'center',
         fontSize: '18px'
     },
     logo: {
