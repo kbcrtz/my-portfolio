@@ -3,9 +3,13 @@ import React from 'react';
 const Header = () => {
     return(
         <header style={styles.header}>
-            <a href='https://kobecortez.com' style={styles.title}>
-                <h3>Kobe Cortez</h3>
-                </a>
+            <a href='https://kobecortez.com' style={styles.logo}>
+            <img
+                src='/star.PNG'
+                alt='site logo'
+                style={styles.image}
+            />
+            </a> 
             <nav style={styles.nav}>
                 <a href="#about" style={styles.link}>About</a>
                 <a href="#projects" style={styles.link}>Projects</a>
@@ -19,7 +23,6 @@ const styles = {
     header: {
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
         padding: '20px',
         backgroundColor: '#fff',
         color: '#000'
@@ -37,6 +40,15 @@ const styles = {
         color: 'inherit',
         textDecoration: 'none',
         fontSize: '18px'
-    }
+    },
+    logo: {
+        textDecoration: 'none', // Remove link underline
+    },
+    image: {
+        width: '70px',  // Adjust size of the image
+        height: '70px', // Ensure proportions are consistent
+        objectFit: 'contain', // Keeps image aspect ratio
+        transform: 'scaleX(-1)',
+    },
 }
 export default Header;
