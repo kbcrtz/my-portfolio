@@ -3,7 +3,7 @@ import React from 'react';
 const Header = () => {
     return(
         <header style={styles.header}>
-            <h1 style={styles.title}>Kobe Cortez</h1>
+            <h2 style={styles.title}>Kobe Cortez</h2>
             <nav style={styles.nav}>
                 <a href="#about" style={styles.link}>About</a>
                 <a href="#projects" style={styles.link}>Projects</a>
@@ -19,8 +19,8 @@ const styles = {
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '20px',
-        backgroundColor: '#333',
-        color: '#fff'
+        backgroundColor: '#fff',
+        color: '#000'
     },
     title: {
         fontSize: '18px',
@@ -30,7 +30,7 @@ const styles = {
         gap: '15px',
     },
     link:{
-        color: '#fff',
+        color: '#000',
         textDecoration: 'none',
         fontSize: '18px'
     }
