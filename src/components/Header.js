@@ -3,7 +3,9 @@ import React from 'react';
 const Header = () => {
     return(
         <header style={styles.header}>
-            <h2 style={styles.title}>Kobe Cortez</h2>
+            <a href='https://kobecortez.com' style={styles.title}>
+                <h3>Kobe Cortez</h3>
+                </a>
             <nav style={styles.nav}>
                 <a href="#about" style={styles.link}>About</a>
                 <a href="#projects" style={styles.link}>Projects</a>
@@ -23,14 +25,16 @@ const styles = {
         color: '#000'
     },
     title: {
-        fontSize: '18px',
+        textDecoration: 'none', // Remove the underline
+        color: 'inherit',       // Use the text color of the parent element
+        fontWeight: 'bold',     // Optional, make it bold
     },
     nav: {
         display: 'flex',
         gap: '15px',
     },
     link:{
-        color: '#000',
+        color: 'inherit',
         textDecoration: 'none',
         fontSize: '18px'
     }
