@@ -35,7 +35,7 @@ const styles = {
         gap: '20px',
     },
     projectItem: {
-        width: '400px',
+        width: '300px',
         padding: '20px',
         border: '1px solid #ddd',
         borderRadius: '8px',

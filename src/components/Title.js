@@ -37,9 +37,9 @@ const styles = {
     justifyContent: "center",
   },
   container: {
-    display: "flex", // Align items side by side by default
-    alignItems: "center",
-    justifyContent: "space-between",
+    display: "flex",
+    alignItems: "center", // Vertically center items
+    justifyContent: "center", // Horizontally center the entire container
     maxWidth: "800px",
     width: "100%",
     gap: "40px", // Space between text and image
