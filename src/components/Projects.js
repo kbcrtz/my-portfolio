@@ -26,6 +26,7 @@ const styles = {
     section: {
         padding: '40px',
         textAlign: 'center',
+        fontFamily: "'Fira Code', monospace",
     },
     projectList: {
         display: 'flex',
@@ -34,7 +35,7 @@ const styles = {
         gap: '20px',
     },
     projectItem: {
-        width: '80%',
+        width: '400px',
         padding: '20px',
         border: '1px solid #ddd',
         borderRadius: '8px',

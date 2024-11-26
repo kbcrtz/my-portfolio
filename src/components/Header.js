@@ -11,9 +11,9 @@ const Header = () => {
             />
             </a> 
             <nav style={styles.nav}>
-                <a href="#about" style={styles.link}>About</a>
-                <a href="#projects" style={styles.link}>Projects</a>
-                <a href='#contact' style={styles.link}>Contact</a>
+                <a href="#about" style={styles.link}>about</a>
+                <a href="#projects" style={styles.link}>projects</a>
+                <a href='#contact' style={styles.link}>contact</a>
             </nav>
         </header>
     );
@@ -36,6 +36,7 @@ const styles = {
     nav: {
         display: 'flex',
         gap: '15px',
+        fontFamily: "'Fira Code', monospace",
     },
     link:{
         color: 'inherit',

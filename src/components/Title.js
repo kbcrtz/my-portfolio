@@ -2,7 +2,7 @@ import React from "react";
 import profileImage from "../profileImage.jpeg";
 import TypewriterEffect from "./TypewriterEffect";
 
-const About = () => {
+const Title = () => {
   const aboutText = `function kobeCortez() {\n \n  full-stack software engineer\n \n}`;
 
   return (
@@ -32,32 +32,44 @@ const About = () => {
 const styles = {
   section: {
     padding: "40px 20px",
-    backgroundColor: "#0",
+    backgroundColor: "#0", // Keep original background
     display: "flex",
     justifyContent: "center",
   },
   container: {
-    display: "flex", // Align items side by side
-    alignItems: "center", // Vertically align text and image
-    justifyContent: "space-between", // Add space between items
+    display: "flex", // Align items side by side by default
+    alignItems: "center",
+    justifyContent: "space-between",
     maxWidth: "800px",
     width: "100%",
     gap: "40px", // Space between text and image
+    flexWrap: "wrap", // Allow wrapping for smaller screens
   },
   textContainer: {
-    flex: 1, // Allow the text container to take up remaining space
+    flex: 1, // Allow the text to take up the remaining space
     textAlign: "left",
-    fontSize: "20px",
+    fontSize: "25px",
     fontFamily: "'Fira Code', monospace",
   },
   imageContainer: {
-    flexShrink: 0, // Prevent image container from shrinking
+    flexShrink: 1, // Allow image to shrink when necessary
+    textAlign: "center", // Center the image when it moves below the text
   },
   image: {
     borderRadius: "50%",
-    width: "200px",
-    height: "200px",
+    width: "250px", // Original size
+    height: "250px", // Original size
+    maxWidth: "100%", // Prevent overflow
+    transition: "width 0.3s, height 0.3s", // Smooth resizing
+  },
+  "@media (max-width: 768px)": {
+    container: {
+      flexDirection: "column", // Stack vertically on smaller screens
+    },
+    imageContainer: {
+      marginTop: "20px", // Add space between text and image
+    },
   },
 };
 
-export default About;
+export default Title;
