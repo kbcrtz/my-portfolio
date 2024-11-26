@@ -47,7 +47,7 @@ const styles = {
   textContainer: {
     flex: 1, // Allow the text container to take up remaining space
     textAlign: "left",
-    fontSize: "22px",
+    fontSize: "20px",
     fontFamily: "'Fira Code', monospace",
   },
   imageContainer: {
