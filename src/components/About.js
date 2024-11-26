@@ -3,7 +3,7 @@ import profileImage from "../profileImage.jpeg";
 import TypewriterEffect from "./TypewriterEffect";
 
 const About = () => {
-  const aboutText = `function kobeCortez() {\n  full-stack software engineer\n}`;
+  const aboutText = `function kobeCortez() {\n \n  full-stack software engineer\n \n}`;
 
   return (
     <section id="about" style={styles.section}>
@@ -18,7 +18,11 @@ const About = () => {
         </div>
         {/* Profile Image */}
         <div style={styles.imageContainer}>
-          <img src={profileImage} alt="Kobe Cortez" style={styles.image} />
+          <img
+            src={profileImage}
+            alt="Kobe Cortez"
+            style={styles.image}
+          />
         </div>
       </div>
     </section>
@@ -28,42 +32,31 @@ const About = () => {
 const styles = {
   section: {
     padding: "40px 20px",
-    backgroundColor: "#f4f4f4",
+    backgroundColor: "#0",
     display: "flex",
     justifyContent: "center",
   },
   container: {
-    display: "flex",
-    flexDirection: "row", // Default to side-by-side layout
-    alignItems: "center", // Vertically align items
-    justifyContent: "space-between", // Space between text and image
-    maxWidth: "900px",
+    display: "flex", // Align items side by side
+    alignItems: "center", // Vertically align text and image
+    justifyContent: "space-between", // Add space between items
+    maxWidth: "800px",
     width: "100%",
     gap: "40px", // Space between text and image
   },
   textContainer: {
-    flex: 1,
+    flex: 1, // Allow the text container to take up remaining space
     textAlign: "left",
-    fontSize: "18px",
+    fontSize: "20px",
     fontFamily: "'Fira Code', monospace",
   },
   imageContainer: {
-    flexShrink: 0, // Prevent shrinking
-    textAlign: "center", // Center image if it wraps below
+    flexShrink: 0, // Prevent image container from shrinking
   },
   image: {
     borderRadius: "50%",
-    width: "175px",
-    height: "175px",
-  },
-  "@media (max-width: 768px)": {
-    container: {
-      flexDirection: "column", // Stack items vertically on small screens
-      textAlign: "center", // Center align content when stacked
-    },
-    imageContainer: {
-      marginTop: "20px", // Add spacing when stacked
-    },
+    width: "200px",
+    height: "200px",
   },
 };
 
