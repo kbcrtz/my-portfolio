@@ -39,7 +39,7 @@ const styles = {
   container: {
     display: "flex", // Align items side by side
     alignItems: "center", // Vertically align text and image
-    justifyContent: "space-between", // Add space between items
+    //justifyContent: "space-between", // Add space between items
     maxWidth: "800px",
     width: "100%",
     gap: "40px", // Space between text and image
