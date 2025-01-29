@@ -3,7 +3,7 @@ import TypewriterEffect from "./TypewriterEffect";
 
 
 const Projects = () => {
-    const descTextOne = `We designed and built a fully functional 8-bit computer within Minecraft! 
+    const descTextOne = `We designed and built a fully functional 8-bit computer within Minecraft!
     
 Featuring a custom CPU architecture, the system executes basic arithmetic and logic operations using an instruction set my partner and I developed.`;
 
@@ -18,7 +18,7 @@ Featuring a custom CPU architecture, the system executes basic arithmetic and lo
                     </a>
                     <TypewriterEffect
             text={descTextOne}
-            speed={25}
+            speed={0}
             fontFamily="'Fira Code', monospace"
           />
                 </div>
