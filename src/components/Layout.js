@@ -1,17 +1,21 @@
 import React from "react";
 import AboutMe from "./AboutMe";
+import Experience from "./Experience";
 import Projects from "./Projects";
 
 const Layout = () => {
     return (
-        <div style={styles.container}>
-            <div style={styles.column}>
-                <AboutMe />
+        <>
+            <div style={styles.container}>
+                <div style={styles.leftColumn}>
+                    <AboutMe />
+                </div>
+                <div style={styles.rightColumn}>
+                    <Experience />
+                </div>
             </div>
-            <div style={styles.column}>
-                <Projects />
-            </div>
-        </div>
+            <Projects />
+        </>
     );
 };
 
@@ -26,9 +30,18 @@ const styles = {
         margin: "0 auto", // Center container horizontally
         gap: "40px", // Space between the two sections
     },
-    column: {
+    leftColumn: {
         flex: "1 1 45%", // Allow columns to take 45% width and shrink if needed
-        minWidth: "300px", // Ensure columns don’t shrink too much
+        minWidth: "300px", // Ensure columns don't shrink too much
+        order: 1, // Display first on mobile
+        display: "flex",
+        flexDirection: "column",
+        gap: "20px", // Space between AboutMe and Experience
+    },
+    rightColumn: {
+        flex: "1 1 45%", // Allow columns to take 45% width and shrink if needed
+        minWidth: "300px", // Ensure columns don't shrink too much
+        order: 2, // Display second on mobile (after left column)
     },
 };
 
