@@ -1,5 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 import TypewriterEffect from "./TypewriterEffect";
+
+const FONT_FAMILY = "'Fira Code', monospace";
+const NAV_TRIGGER_ZONE = 100;
 
 // Project data configuration
 const projectsData = [
@@ -38,180 +45,162 @@ Trained over 176,000 episodes, the agent demonstrates strong strategic play incl
 ];
 
 const Projects = () => {
-  const [expandedCards, setExpandedCards] = useState({});
-  const scrollRef = useRef(null);
-  const itemRefs = useRef([]);
-  const [centerIndex, setCenterIndex] = useState(0);
-
-  // Create infinite scroll by duplicating items
-  const infiniteProjects = [...projectsData, ...projectsData, ...projectsData];
-
-  const toggleCard = (id) => {
-    setExpandedCards((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+  const [selectedId, setSelectedId] = useState(null);
+  const [showPrev, setShowPrev] = useState(false);
+  const [showNext, setShowNext] = useState(false);
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
+  const syncBounds = (swiper) => {
+    setIsAtStart(swiper.isBeginning);
+    setIsAtEnd(swiper.isEnd);
   };
-
-  const handleCardClick = (index, id) => {
-    // If card is not in center, scroll it to center
-    if (index !== centerIndex) {
-      const item = itemRefs.current[index];
-      if (item && scrollRef.current) {
-        const container = scrollRef.current;
-        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-        const containerCenter = container.clientWidth / 2;
-        const scrollTo = itemCenter - containerCenter;
-
-        container.scrollTo({
-          left: scrollTo,
-          behavior: "smooth",
-        });
-      }
-    } else {
-      // If card is in center, toggle it
-      toggleCard(id);
-    }
-  };
-
   useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-
-    // Start at the middle set of projects
-    setTimeout(() => {
-      const initialScroll = scrollContainer.scrollWidth / 3;
-      scrollContainer.scrollLeft = initialScroll;
-    }, 0);
-
-    let scrollTimeout;
-    const handleScroll = () => {
-      // Debounce the scroll handler to reduce glitching
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        const container = scrollContainer;
-        const containerCenter =
-          container.scrollLeft + container.clientWidth / 2;
-
-        // Find the item closest to center
-        let closestIndex = 0;
-        let closestDistance = Infinity;
-
-        itemRefs.current.forEach((item, index) => {
-          if (item) {
-            const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-            const distance = Math.abs(containerCenter - itemCenter);
-            if (distance < closestDistance) {
-              closestDistance = distance;
-              closestIndex = index;
-            }
-          }
-        });
-
-        setCenterIndex(closestIndex);
-
-        // Infinite scroll logic - wrap around (only after scroll stops)
-        const scrollWidth = container.scrollWidth;
-        const scrollLeft = container.scrollLeft;
-        const sectionWidth = scrollWidth / 3;
-
-        if (scrollLeft <= 10) {
-          container.scrollLeft = scrollLeft + sectionWidth;
-        } else if (scrollLeft >= scrollWidth - container.clientWidth - 10) {
-          container.scrollLeft = scrollLeft - sectionWidth;
-        }
-      }, 50);
+    const onMouseMove = (e) => {
+      setShowPrev(e.clientX < NAV_TRIGGER_ZONE);
+      setShowNext(e.clientX > window.innerWidth - NAV_TRIGGER_ZONE);
     };
-
-    scrollContainer.addEventListener("scroll", handleScroll);
+    const onMouseLeave = () => {
+      setShowPrev(false);
+      setShowNext(false);
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    document.documentElement.addEventListener("mouseleave", onMouseLeave);
     return () => {
-      scrollContainer.removeEventListener("scroll", handleScroll);
-      clearTimeout(scrollTimeout);
+      window.removeEventListener("mousemove", onMouseMove);
+      document.documentElement.removeEventListener("mouseleave", onMouseLeave);
     };
   }, []);
 
-  const getItemStyle = (index) => {
-    const distance = Math.abs(index - centerIndex);
-    const isCentered = index === centerIndex;
-
-    // Gradual scaling and blurring based on distance
-    const scale = Math.max(0.7, 1 - distance * 0.15);
-    const blur = Math.min(distance * 2, 5);
-    const opacity = Math.max(0.5, 1 - distance * 0.2);
-
-    return {
-      ...styles.projectItem,
-      transform: `scale(${scale})`,
-      filter: `blur(${blur}px)`,
-      opacity: opacity,
-      transition: "all 0.3s ease",
-      cursor: isCentered ? "pointer" : "grab",
-      pointerEvents: "auto",
-    };
+  const handleCardClick = (id) => {
+    setSelectedId((prev) => (prev === id ? null : id));
   };
+
+  const selectedProject = projectsData.find((p) => p.id === selectedId);
 
   return (
     <section id="projects" style={styles.section}>
       <style>
         {`
-          .projects-carousel-container::-webkit-scrollbar {
-            display: none;
+          .projects-swiper { overflow: visible !important; --swiper-navigation-sides-offset: 0px; }
+          .project-card {
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            background: #111;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+          }
+          .project-card:hover {
+            transform: scale(1.06);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+            position: relative;
+            outline: 3px solid #000;
+            outline-offset: 3px;
+          }
+          .has-selection .project-card:hover {
+            outline: none;
+          }
+          .project-card:focus-visible {
+            outline: 2px solid #000;
+            outline-offset: 3px;
+          }
+          .swiper-button-next, .swiper-button-prev {
+            color: #000 !important;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+          }
+          .swiper-button-next.swiper-button-disabled,
+          .swiper-button-prev.swiper-button-disabled {
+            opacity: 0 !important;
+          }
+          .show-prev .swiper-button-prev,
+          .show-next .swiper-button-next {
+            opacity: 1;
+            pointer-events: auto;
           }
         `}
       </style>
       <h2>Projects</h2>
       <div
-        ref={scrollRef}
-        className="projects-carousel-container"
-        style={styles.projectList}
+        style={{ padding: "10px" }}
+        className={[
+          (showPrev && !isAtStart) ? "show-prev" : "",
+          (showNext && !isAtEnd) ? "show-next" : "",
+          selectedId ? "has-selection" : "",
+        ].join(" ")}
       >
-        {infiniteProjects.map((project, index) => {
-          const isExpanded = expandedCards[`${project.id}-${index}`];
-          return (
-            <div
-              key={`${project.id}-${index}`}
-              ref={(el) => (itemRefs.current[index] = el)}
-              style={getItemStyle(index)}
-              onClick={() => handleCardClick(index, `${project.id}-${index}`)}
-            >
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={styles.projectLink}
-                onClick={(e) => {
-                  // Only allow link click if card is centered
-                  if (index !== centerIndex) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }
+        <Swiper
+          className="projects-swiper"
+          modules={[Navigation]}
+          navigation={true}
+          slidesPerView="auto"
+          spaceBetween={20}
+          style={{ padding: "2px 8px" }}
+          onSwiper={syncBounds}
+          onSlideChange={syncBounds}
+        >
+          {projectsData.map((project) => (
+            <SwiperSlide key={project.id} style={{ width: "280px" }}>
+              <div
+                className="project-card"
+                tabIndex={0}
+                role="button"
+                aria-pressed={selectedId === project.id}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ")
+                    handleCardClick(project.id);
                 }}
+                style={{
+                  outline: selectedId === project.id ? "3px solid #000" : "none",
+                  outlineOffset: "3px",
+                  boxShadow:
+                    selectedId === project.id
+                      ? "0 6px 20px rgba(0,0,0,0.3)"
+                      : "none",
+                }}
+                onClick={() => handleCardClick(project.id)}
               >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  style={styles.projectImage}
-                />
-              </a>
-              <div style={styles.headerSection}>
-                <h3 style={styles.projectTitle}>{project.title}</h3>
-                <span style={styles.chevron}>{isExpanded ? "▼" : "▶"}</span>
-              </div>
-              {isExpanded && (
-                <div style={styles.descriptionContainer}>
-                  <h4 style={styles.category}>{project.category}</h4>
-                  <p style={styles.dateRange}>{project.dateRange}</p>
-                  <TypewriterEffect
-                    text={project.description}
-                    speed={0}
-                    fontFamily="'Fira Code', monospace"
+                <div style={{ position: "relative", aspectRatio: "16/10" }}>
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    style={styles.thumbnail}
                   />
+                  <div style={styles.gradientOverlay}>
+                    <span style={styles.categoryBadge}>{project.category}</span>
+                    <p style={styles.overlayTitle}>{project.title}</p>
+                  </div>
                 </div>
-              )}
-            </div>
-          );
-        })}
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
+
+      {selectedProject && (
+        <div style={styles.detailPanel}>
+          <div style={styles.detailHeader}>
+            <h3 style={styles.detailTitle}>{selectedProject.title}</h3>
+            <a
+              href={selectedProject.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styles.detailLink}
+            >
+              View Project →
+            </a>
+          </div>
+          <p style={styles.detailMeta}>
+            {selectedProject.category} · {selectedProject.dateRange}
+          </p>
+          <TypewriterEffect
+            text={selectedProject.description}
+            speed={0}
+            fontFamily={FONT_FAMILY}
+          />
+        </div>
+      )}
     </section>
   );
 };
@@ -219,73 +208,67 @@ const Projects = () => {
 const styles = {
   section: {
     padding: "40px",
-    textAlign: "Left",
-    fontFamily: "'Fira Code', monospace",
+    textAlign: "left",
+    fontFamily: FONT_FAMILY,
   },
-  projectList: {
-    display: "flex",
-    overflowX: "scroll",
-    gap: "20px",
-    padding: "40px 20px",
-    scrollSnapType: "x mandatory",
-    WebkitOverflowScrolling: "touch",
-    scrollbarWidth: "none", // Firefox
-    msOverflowStyle: "none", // IE/Edge
+  thumbnail: {
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    display: "block",
   },
-  projectItem: {
-    flex: "0 1 400px",
-    minWidth: "270px",
-    maxWidth: "500px",
+  gradientOverlay: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    background:
+      "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%)",
+    padding: "24px 10px 10px",
+  },
+  categoryBadge: {
+    display: "block",
+    color: "rgba(255,255,255,0.65)",
+    fontSize: "10px",
+    fontFamily: FONT_FAMILY,
+    marginBottom: "2px",
+  },
+  overlayTitle: {
+    color: "#fff",
+    fontSize: "13px",
+    fontWeight: "600",
+    margin: "0",
+    fontFamily: FONT_FAMILY,
+  },
+  detailPanel: {
+    marginTop: "16px",
     padding: "20px",
     border: "1px solid #ddd",
     borderRadius: "8px",
-    textAlign: "left",
-    transition: "box-shadow 0.3s ease",
-    scrollSnapAlign: "center",
   },
-  projectImage: {
-    width: "100%",
-    height: "200px",
-    objectFit: "cover",
-    borderRadius: "8px",
-  },
-  projectLink: {
-    textDecoration: "none",
-    color: "inherit",
-  },
-  headerSection: {
+  detailHeader: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    userSelect: "none",
   },
-  projectTitle: {
-    margin: "10px 0",
-    fontFamily: "'Fira Code', monospace",
+  detailTitle: {
+    margin: "0",
+    fontFamily: FONT_FAMILY,
   },
-  category: {
-    fontSize: "16px",
-    fontWeight: "normal",
-    margin: "5px 0",
-    color: "#555",
-    fontFamily: "'Fira Code', monospace",
-  },
-  dateRange: {
+  detailLink: {
     fontSize: "14px",
+    color: "inherit",
+    textDecoration: "none",
+    fontWeight: "600",
+    fontFamily: FONT_FAMILY,
+  },
+  detailMeta: {
+    fontSize: "13px",
     color: "#888",
-    margin: "5px 0 10px 0",
-    fontFamily: "'Fira Code', monospace",
-  },
-  chevron: {
-    fontSize: "20px",
-    color: "#555",
-    marginLeft: "10px",
-    transition: "transform 0.3s ease",
-  },
-  descriptionContainer: {
-    marginTop: "10px",
-    paddingTop: "10px",
-    borderTop: "1px solid #eee",
+    margin: "4px 0 12px",
+    fontFamily: FONT_FAMILY,
   },
 };
 
