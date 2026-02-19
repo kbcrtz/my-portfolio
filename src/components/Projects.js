@@ -42,6 +42,16 @@ Featuring a custom CPU architecture, the system executes basic arithmetic and lo
 
 Trained over 176,000 episodes, the agent demonstrates strong strategic play including threat recognition and tactical positioning. Features include GPU acceleration, saved model checkpoints, and an interactive CLI to play against the trained AI.`,
   },
+  {
+    id: 4,
+    title: "Gear Fitness",
+    category: "Mobile Development",
+    dateRange: "Fall 2025-Present",
+    image:
+      "https://private-user-images.githubusercontent.com/95990818/538922418-13036473-e0c7-4126-8bd4-68a00067088d.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzE0NjA2NzEsIm5iZiI6MTc3MTQ2MDM3MSwicGF0aCI6Ii85NTk5MDgxOC81Mzg5MjI0MTgtMTMwMzY0NzMtZTBjNy00MTI2LThiZDQtNjhhMDAwNjcwODhkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAyMTklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMjE5VDAwMTkzMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTI2MGUwNDA1NmFmMjQwODk3NmZhNGZhNDc4YWMzYjMzYjZjOWViYTdiMGEwYzU3YWYyNTcwMDk0MTY1NmYyNWEmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.-DCQcqo6QiE1Js0oxKZe28RiaT9jrBEO0D5eTKu2-rc",
+    link: "https://github.com/gear-fitness/gear-fitness-app",
+    description: `Built a responsive portfolio website using React, TypeScript, and Material UI. Deployed on Vercel.`,
+  },
 ];
 
 const Projects = () => {
@@ -125,8 +135,8 @@ const Projects = () => {
       <div
         style={{ padding: "10px" }}
         className={[
-          (showPrev && !isAtStart) ? "show-prev" : "",
-          (showNext && !isAtEnd) ? "show-next" : "",
+          showPrev && !isAtStart ? "show-prev" : "",
+          showNext && !isAtEnd ? "show-next" : "",
           selectedId ? "has-selection" : "",
         ].join(" ")}
       >
@@ -152,7 +162,8 @@ const Projects = () => {
                     handleCardClick(project.id);
                 }}
                 style={{
-                  outline: selectedId === project.id ? "3px solid #000" : "none",
+                  outline:
+                    selectedId === project.id ? "3px solid #000" : "none",
                   outlineOffset: "3px",
                   boxShadow:
                     selectedId === project.id
@@ -195,6 +206,7 @@ const Projects = () => {
             {selectedProject.category} · {selectedProject.dateRange}
           </p>
           <TypewriterEffect
+            key={selectedId}
             text={selectedProject.description}
             speed={0}
             fontFamily={FONT_FAMILY}
