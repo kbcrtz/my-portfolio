@@ -6,8 +6,8 @@ const experienceData = [
   {
     id: 1,
     company: "White Pass Ski Patrol, White Pass Ski Area",
-    role: "Software Development Intern",
-    dateRange: "June 2025 - Present",
+    role: "Software Developer",
+    dateRange: "May 2025 - August 2025",
     image: "white_pass_logo-removebg-preview.png",
     link: "https://www.skiwhitepass.com/",
     description: `Built scheduling feature for React web app serving 200+ patrollers with grid-based interface, replacing manual system and enabling efficient run assignment tracking through scalable, maintainable code following best practices.
