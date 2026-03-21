@@ -1,13 +1,261 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import "leaflet/dist/leaflet.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: rgb(9 9 11);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.heroMapFrame {
+  min-height: 270px;
+  transition: box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.heroMapFrame .leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #09090b;
+}
+
+.heroPulseMarker {
+  background: transparent;
+  border: none;
+}
+
+.heroPulseMarkerDot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(9, 9, 11, 0.7);
+}
+
+.heroPulseMarkerRing {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  animation: heroPulseMarkerRing 1.8s ease-out infinite;
+}
+
+html.light .heroPulseMarkerDot {
+  background: #111111;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
+}
+
+html.light .heroPulseMarkerRing {
+  border-color: rgba(17, 17, 17, 0.75);
+}
+
+.heroMapFrame:hover .heroPulseMarkerDot,
+.heroMapFrame:focus-within .heroPulseMarkerDot {
+  background: #ef4444;
+}
+
+.heroMapFrame:hover .heroPulseMarkerRing,
+.heroMapFrame:focus-within .heroPulseMarkerRing {
+  border-color: rgba(239, 68, 68, 0.76);
+}
+
+html.light .heroMapFrame:hover .heroPulseMarkerDot,
+html.light .heroMapFrame:focus-within .heroPulseMarkerDot {
+  background: #ff2d2d;
+}
+
+html.light .heroMapFrame:hover .heroPulseMarkerRing,
+html.light .heroMapFrame:focus-within .heroPulseMarkerRing {
+  border-color: rgba(255, 45, 45, 0.9);
+}
+
+html.dark .heroMapFrame:hover,
+html.dark .heroMapFrame:focus-within {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.45),
+    0 0 22px rgba(255, 255, 255, 0.22);
+}
+
+html.light .heroMapFrame:hover,
+html.light .heroMapFrame:focus-within {
+  border-color: rgba(9, 9, 11, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(9, 9, 11, 0.36),
+    0 0 22px rgba(9, 9, 11, 0.22);
+}
+
+.projectCardGlow,
+.contactButtonGlow {
+  transition: box-shadow 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.heroPrimaryCta {
+  border: 1px solid rgba(24, 24, 27, 0.92);
+  background: #18181b;
+  color: #fafafa;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease;
+}
+
+.heroPrimaryCta:hover,
+.heroPrimaryCta:focus-visible {
+  background: #09090b;
+}
+
+/* Match glow to button color: black button -> black glow, white button -> white glow. */
+html.light .heroPrimaryCta:hover,
+html.light .heroPrimaryCta:focus-visible {
+  border-color: rgba(9, 9, 11, 0.72);
+  box-shadow:
+    0 0 0 1px rgba(9, 9, 11, 0.5),
+    0 0 22px rgba(9, 9, 11, 0.26);
+}
+
+html.dark .heroPrimaryCta {
+  border-color: rgba(255, 255, 255, 0.85);
+  background: #f4f4f5;
+  color: #111827;
+}
+
+html.dark .heroPrimaryCta:hover,
+html.dark .heroPrimaryCta:focus-visible {
+  background: #ffffff;
+  border-color: rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.56),
+    0 0 22px rgba(255, 255, 255, 0.3);
+}
+
+.heroSecondaryCta {
+  border: 1px solid rgba(63, 63, 70, 0.55);
+  color: #3f3f46;
+}
+
+.heroSecondaryCta:hover,
+.heroSecondaryCta:focus-visible {
+  border-color: rgba(9, 9, 11, 0.72);
+  color: #09090b;
+}
+
+html.dark .heroSecondaryCta {
+  border-color: rgba(161, 161, 170, 0.52);
+  color: #e4e4e7;
+}
+
+html.dark .heroSecondaryCta:hover,
+html.dark .heroSecondaryCta:focus-visible {
+  border-color: rgba(255, 255, 255, 0.82);
+  color: #ffffff;
+}
+
+/* Match .heroMapFrame hover glow; higher specificity so Tailwind hover:border-* does not override. */
+html.dark article.projectCardGlow:hover,
+html.dark article.projectCardGlow:focus-within,
+html.dark a.contactButtonGlow:hover,
+html.dark a.contactButtonGlow:focus-visible {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.45),
+    0 0 22px rgba(255, 255, 255, 0.22);
+}
+
+html.light article.projectCardGlow:hover,
+html.light article.projectCardGlow:focus-within,
+html.light a.contactButtonGlow:hover,
+html.light a.contactButtonGlow:focus-visible {
+  border-color: rgba(9, 9, 11, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(9, 9, 11, 0.36),
+    0 0 22px rgba(9, 9, 11, 0.22);
+}
+
+@keyframes heroPulseMarkerRing {
+  0% {
+    transform: translate(-50%, -50%) scale(0.45);
+    opacity: 0.9;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.25);
+    opacity: 0.25;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.45);
+    opacity: 0;
+  }
+}
+
+.heroMapGradient {
+  background: linear-gradient(
+    90deg,
+    rgba(9, 9, 11, 0.96) 0%,
+    rgba(9, 9, 11, 0.9) 34%,
+    rgba(9, 9, 11, 0.46) 62%,
+    rgba(9, 9, 11, 0.08) 100%
+  );
+}
+
+html.light .heroMapGradient {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.86) 34%,
+    rgba(255, 255, 255, 0.46) 62%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+}
+
+/* Default icon: white in dark mode, dark in light mode (see html.light below) */
+.stackTechIcon {
+  color: #ffffff;
+}
+
+html.light .stackTechIcon {
+  color: #18181b;
+}
+
+.stackTechCard:hover .stackTechIcon,
+.stackTechCard:focus-within .stackTechIcon {
+  color: var(--tech-color);
+}
+
+.stackTechCard:hover,
+.stackTechCard:focus-within {
+  border-color: var(--tech-color);
+  box-shadow:
+    0 0 0 1px var(--tech-color),
+    0 0 14px color-mix(in srgb, var(--tech-color) 35%, transparent);
+}
+
+html.dark .stackTechCard:hover,
+html.dark .stackTechCard:focus-within {
+  box-shadow:
+    0 0 0 1px var(--tech-color),
+    0 0 20px color-mix(in srgb, var(--tech-color) 65%, transparent),
+    0 0 34px color-mix(in srgb, var(--tech-color) 35%, transparent);
 }
