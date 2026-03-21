@@ -7,6 +7,9 @@ import StackSection from "./components/sections/StackSection";
 import ThemeToggle from "./components/ui/ThemeToggle";
 import { portfolioData } from "./data/portfolio";
 
+const headerBrandText = "kobe cortez";
+const isVowel = (char: string) => "aeiou".includes(char.toLowerCase());
+
 const App = () => {
   const [isDark, setIsDark] = useState(true);
 
@@ -27,11 +30,31 @@ const App = () => {
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 transition-colors dark:bg-zinc-950 dark:text-zinc-100">
       <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-zinc-50/90 backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-950/90">
-        <div className="mx-auto flex w-full max-w-[38.25rem] items-center justify-between px-3 py-2.5 md:px-6 md:py-3">
+        <div className="relative mx-auto flex w-full max-w-[38.25rem] items-center justify-between px-3 py-2.5 md:px-6 md:py-3">
           <a href="#hero" className="text-sm font-semibold tracking-tight md:text-base">
-            kbcrtz
+            <span className="sr-only">kbcrtz</span>
+            <span aria-hidden="true" className="brandMorph">
+              {headerBrandText.split("").map((char, index) => {
+                const isSpace = char === " ";
+                const className = [
+                  "brandMorphChar",
+                  isSpace ? "brandMorphSpace" : isVowel(char) ? "brandMorphVowel" : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ");
+
+                return (
+                  <span key={`${char}-${index}`} className={className}>
+                    {char}
+                  </span>
+                );
+              })}
+            </span>
           </a>
-          <nav aria-label="Primary" className="hidden items-center gap-5 md:flex">
+          <nav
+            aria-label="Primary"
+            className="hidden items-center gap-5 md:absolute md:left-1/2 md:flex md:-translate-x-1/2"
+          >
             {portfolioData.navLinks.map((link) => (
               <a
                 key={link.href}
