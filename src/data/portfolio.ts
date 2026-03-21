@@ -15,9 +15,9 @@ export const portfolioData: PortfolioData = {
   location: "Tacoma, WA",
   oneLiner: "Building B2C Applications",
   about: [
-    "I am a Computer Science student at Pacific Lutheran University focused on building practical software that solves real problems.",
-    "My work centers on full-stack applications across React, TypeScript, Spring Boot, and PostgreSQL, with product-minded execution from architecture to deployment.",
-    "I enjoy shipping disciplined, user-ready experiences that balance clean engineering with measurable outcomes.",
+    "Hey! I'm a third year Computer Science student at Pacific Lutheran University focused on building practical software that solves real problems.",
+    "My work centers on full-stack applications across React/React Native, TypeScript, Spring Boot, and PostgreSQL, with product-minded execution from architecture to deployment.",
+    "I enjoy shipping user-ready experiences that balance clean engineering with measurable results.",
   ],
   navLinks: [
     { label: "About", href: "#about" },
@@ -52,8 +52,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       name: "White Pass Ski Area",
-      summary:
-        "Scheduling tool for 200+ patrollers",
+      summary: "Scheduling tool for 200+ patrollers",
       image: "/images/white-pass-ski-area.png",
       stack: ["React", "TypeScript", "Firebase", "REST APIs", "CI/CD"],
       linkedin:

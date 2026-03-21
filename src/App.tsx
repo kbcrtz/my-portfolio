@@ -29,7 +29,7 @@ const App = () => {
       <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-zinc-50/90 backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-950/90">
         <div className="mx-auto flex w-full max-w-[38.25rem] items-center justify-between px-3 py-2.5 md:px-6 md:py-3">
           <a href="#hero" className="text-sm font-semibold tracking-tight md:text-base">
-            {portfolioData.name}
+            kbcrtz
           </a>
           <nav aria-label="Primary" className="hidden items-center gap-5 md:flex">
             {portfolioData.navLinks.map((link) => (
