@@ -1,6 +1,7 @@
 import { ArrowRight, MapPin } from "lucide-react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import L from "leaflet";
+import { useEffect, useState } from "react";
 
 type HeroSectionProps = {
   name: string;
@@ -11,7 +12,8 @@ type HeroSectionProps = {
 };
 
 const tacomaCoordinates: [number, number] = [47.2529, -122.4443];
-const mapCenter: [number, number] = [47.223, -122.555];
+const desktopMapCenter: [number, number] = [47.223, -122.555];
+const mobileMapCenter: [number, number] = [47.223, -122.52];
 const pulseMarkerIcon = L.divIcon({
   className: "heroPulseMarker",
   html: `<span class="heroPulseMarkerDot"></span><span class="heroPulseMarkerRing"></span>`,
@@ -19,7 +21,29 @@ const pulseMarkerIcon = L.divIcon({
   iconAnchor: [3, -25],
 });
 
-const HeroSection = ({ name, title, location, oneLiner, isDark }: HeroSectionProps) => {
+const HeroSection = ({
+  name,
+  title,
+  location,
+  oneLiner,
+  isDark,
+}: HeroSectionProps) => {
+  const [isMobile, setIsMobile] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 767px)").matches,
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const onChange = (event: MediaQueryListEvent) => setIsMobile(event.matches);
+
+    setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener("change", onChange);
+    return () => mediaQuery.removeEventListener("change", onChange);
+  }, []);
+
+  const mapCenter = isMobile ? mobileMapCenter : desktopMapCenter;
   const badgeClasses = isDark
     ? "border-white/25 bg-black/45 text-white/85"
     : "border-zinc-300/80 bg-white/80 text-zinc-700";
@@ -35,6 +59,7 @@ const HeroSection = ({ name, title, location, oneLiner, isDark }: HeroSectionPro
       <div className="heroMapFrame relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
         <div className="absolute inset-0 z-0">
           <MapContainer
+            key={isMobile ? "mobile-map" : "desktop-map"}
             center={mapCenter}
             zoom={11.4}
             className="h-full w-full"
@@ -72,10 +97,14 @@ const HeroSection = ({ name, title, location, oneLiner, isDark }: HeroSectionPro
             {/* <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-100 md:mb-4 md:text-xs md:tracking-[0.2em]">
               {location}
             </p> */}
-            <h1 className={`text-4xl font-semibold tracking-tight md:text-6xl ${headingClasses}`}>
+            <h1
+              className={`text-4xl font-semibold tracking-tight md:text-6xl ${headingClasses}`}
+            >
               {name}
             </h1>
-            <p className={`mt-2 text-base font-medium md:mt-3 md:text-xl ${titleClasses}`}>
+            <p
+              className={`mt-2 text-base font-medium md:mt-3 md:text-xl ${titleClasses}`}
+            >
               {title}
             </p>
             <p
