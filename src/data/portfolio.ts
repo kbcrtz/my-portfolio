@@ -47,6 +47,7 @@ export const portfolioData: PortfolioData = {
         "Docker",
         "AWS",
       ],
+      liveDemo: "https://gearfitness.app",
       repository: "https://github.com/gear-fitness/gear-fitness-app",
       note: "Spring Boot, PostgreSQL, React Native, TypeScript, Docker, AWS",
     },
