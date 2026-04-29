@@ -67,6 +67,15 @@ export const portfolioData: PortfolioData = {
       stack: ["TypeScript", "JavaScript", "Chrome APIs", "REST APIs"],
       note: "JavaScript, Claude, REST API",
     },
+    {
+      name: "Machampions",
+      summary: "Pokemon Champions battle assistant",
+      image: "/images/machampions.png",
+      stack: ["Next.js", "Tailwind CSS", "TypeScript", "Python", "Vercel"],
+      liveDemo: "https://machampions.app",
+      repository: "https://github.com/Machampions/Machampions",
+      note: "Next.js, Tailwind CSS, TypeScript, Python",
+    },
   ],
   contactLinks: [
     { label: "Email", href: "mailto:kobecortez31@gmail.com" },
