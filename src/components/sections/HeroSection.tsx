@@ -10,14 +10,33 @@ type HeroSectionProps = {
 const HeroSection = ({ name, title, oneLiner }: HeroSectionProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Respect reduced-motion: hold on the poster frame instead of looping.
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    // Respect reduced-motion: hold on the poster frame instead of looping.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       video.removeAttribute("autoplay");
       video.pause();
+      return;
     }
+
+    // Mobile browsers pause muted autoplay video when the app is backgrounded
+    // and don't always resume it. Re-play whenever the page becomes visible or
+    // regains focus (e.g. switching back to the tab/app).
+    const resume = () => {
+      if (document.visibilityState === "visible" && video.paused) {
+        void video.play().catch(() => {});
+      }
+    };
+    document.addEventListener("visibilitychange", resume);
+    window.addEventListener("focus", resume);
+    window.addEventListener("pageshow", resume);
+    return () => {
+      document.removeEventListener("visibilitychange", resume);
+      window.removeEventListener("focus", resume);
+      window.removeEventListener("pageshow", resume);
+    };
   }, []);
 
   return (
