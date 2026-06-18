@@ -36,6 +36,39 @@ export const portfolioData: PortfolioData = {
     { name: "Docker", icon: SiDocker, color: "#2496ED" },
     { name: "AWS", icon: FaAws, color: "#FF9900" },
   ],
+  globeLocations: [
+    {
+      id: "puyallup",
+      title: "Puyallup, WA",
+      subtitle: "Hometown",
+      lat: 47.1854,
+      lng: -122.2929,
+      accentColor: "#ef4444",
+      story:
+        "Where it started. I grew up in the Puyallup valley — the fair, the foothills, and the first clumsy lines of code I wrote on a hand-me-down laptop.",
+    },
+    {
+      id: "plu",
+      title: "Pacific Lutheran University",
+      subtitle: "Where I study",
+      lat: 47.1455,
+      lng: -122.4434,
+      accentColor: "#ef4444",
+      story:
+        "Pacific Lutheran University, where I study Computer Science, founded the CS Club and LuteHacks, and turned a hobby into a craft.",
+      isDefault: true,
+    },
+    {
+      id: "seattle",
+      title: "Seattle, WA",
+      subtitle: "Where I build",
+      lat: 47.6062,
+      lng: -122.3321,
+      accentColor: "#ef4444",
+      story:
+        "Seattle — where I put it to work, shipping software at Proliance Surgeons and building in the Pacific Northwest tech scene.",
+    },
+  ],
   experience: [
     {
       org: "Proliance Surgeons",

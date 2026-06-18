@@ -324,6 +324,96 @@ html.light .heroMapGradient {
   );
 }
 
+/* Globe section */
+.globePoster {
+  background: radial-gradient(circle at 38% 32%, #94a3b8 0%, #475569 45%, #1e293b 100%);
+  opacity: 0.4;
+  filter: blur(2px);
+}
+
+.globeLocationButton {
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+/* Leaflet detail map that dives in over the globe on selection. */
+.globeMapOverlay {
+  animation: globeMapFade 750ms ease both;
+}
+
+@keyframes globeMapFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.globeMapOverlay .leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #09090b;
+}
+
+html.light .globeMapOverlay .leaflet-container {
+  background: #f8fafc;
+}
+
+.globeMapMarker {
+  background: transparent;
+  border: none;
+}
+
+.globeMapMarkerDot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  background: #ef4444;
+  box-shadow: 0 0 0 2px rgba(9, 9, 11, 0.65);
+}
+
+.globeMapMarkerRing {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  border: 2px solid rgba(239, 68, 68, 0.7);
+  animation: heroPulseMarkerRing 1.8s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .globeMapOverlay {
+    animation: none;
+  }
+  .globeMapMarkerRing {
+    animation: none;
+  }
+}
+
+.globeLocationButtonActive {
+  box-shadow:
+    0 0 0 1px var(--loc-accent),
+    0 0 14px color-mix(in srgb, var(--loc-accent) 30%, transparent);
+}
+
+.globeLocationButton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--loc-accent) 70%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .globeFrame {
+    transition: none;
+  }
+}
+
 /* Default icon: white in dark mode, dark in light mode (see html.light below) */
 .stackTechIcon {
   color: #ffffff;

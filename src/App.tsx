@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AboutSection from "./components/sections/AboutSection";
 import ContactSection from "./components/sections/ContactSection";
 import ExperienceSection from "./components/sections/ExperienceSection";
+import GlobeSection from "./components/sections/GlobeSection";
 import HeroSection from "./components/sections/HeroSection";
 import StackSection from "./components/sections/StackSection";
 import WorkSection from "./components/sections/WorkSection";
@@ -79,6 +80,7 @@ const App = () => {
           isDark={isDark}
         />
         <StackSection stack={portfolioData.stack} />
+        <GlobeSection locations={portfolioData.globeLocations} isDark={isDark} />
         <AboutSection paragraphs={portfolioData.about} />
         <ExperienceSection
           id="experience"

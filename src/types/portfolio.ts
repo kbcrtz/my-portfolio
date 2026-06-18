@@ -30,6 +30,17 @@ export type StackItem = {
   color: string;
 };
 
+export type GlobeLocation = {
+  id: string;
+  title: string;
+  subtitle?: string;
+  lat: number;
+  lng: number;
+  accentColor: string;
+  story: string;
+  isDefault?: boolean;
+};
+
 export type PortfolioData = {
   name: string;
   title: string;
@@ -38,6 +49,7 @@ export type PortfolioData = {
   about: string[];
   navLinks: { label: string; href: string }[];
   stack: StackItem[];
+  globeLocations: GlobeLocation[];
   experience: ExperienceItem[];
   projects: Project[];
   leadership: ExperienceItem[];
