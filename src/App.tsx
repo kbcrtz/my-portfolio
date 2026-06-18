@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import AboutSection from "./components/sections/AboutSection";
 import ContactSection from "./components/sections/ContactSection";
+import ExperienceSection from "./components/sections/ExperienceSection";
 import HeroSection from "./components/sections/HeroSection";
-import ProjectsSection from "./components/sections/ProjectsSection";
 import StackSection from "./components/sections/StackSection";
+import WorkSection from "./components/sections/WorkSection";
 import ThemeToggle from "./components/ui/ThemeToggle";
 import { portfolioData } from "./data/portfolio";
 
@@ -79,7 +80,24 @@ const App = () => {
         />
         <StackSection stack={portfolioData.stack} />
         <AboutSection paragraphs={portfolioData.about} />
-        <ProjectsSection projects={portfolioData.projects} />
+        <ExperienceSection
+          id="experience"
+          title="Experience"
+          subtitle="Where I've shipped software."
+          items={portfolioData.experience}
+        />
+        <WorkSection
+          id="projects"
+          title="Projects"
+          subtitle="Featured builds with concrete outcomes."
+          projects={portfolioData.projects}
+        />
+        <ExperienceSection
+          id="leadership"
+          title="Leadership"
+          subtitle="Communities I've built and taught."
+          items={portfolioData.leadership}
+        />
         <ContactSection links={portfolioData.contactLinks} />
       </main>
     </div>

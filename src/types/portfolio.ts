@@ -6,6 +6,14 @@ export type ContactLink = {
   external?: boolean;
 };
 
+export type ExperienceItem = {
+  org: string;
+  role: string;
+  period: string;
+  location: string;
+  bullets: string[];
+};
+
 export type Project = {
   name: string;
   summary: string;
@@ -14,7 +22,6 @@ export type Project = {
   liveDemo?: string;
   linkedin?: string;
   repository?: string;
-  note?: string;
 };
 
 export type StackItem = {
@@ -31,6 +38,8 @@ export type PortfolioData = {
   about: string[];
   navLinks: { label: string; href: string }[];
   stack: StackItem[];
+  experience: ExperienceItem[];
   projects: Project[];
+  leadership: ExperienceItem[];
   contactLinks: ContactLink[];
 };

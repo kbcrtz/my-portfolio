@@ -21,7 +21,9 @@ export const portfolioData: PortfolioData = {
   ],
   navLinks: [
     { label: "About", href: "#about" },
+    { label: "Experience", href: "#experience" },
     { label: "Projects", href: "#projects" },
+    { label: "Leadership", href: "#leadership" },
     { label: "Contact", href: "#contact" },
   ],
   stack: [
@@ -33,6 +35,30 @@ export const portfolioData: PortfolioData = {
     { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
     { name: "Docker", icon: SiDocker, color: "#2496ED" },
     { name: "AWS", icon: FaAws, color: "#FF9900" },
+  ],
+  experience: [
+    {
+      org: "Proliance Surgeons",
+      role: "Software Engineering & Applications Intern",
+      period: "Jun 2026 – Present",
+      location: "Seattle, WA",
+      bullets: [
+        "Built Python automation scripts integrating with third-party healthcare APIs to streamline data ingestion across internal and patient-facing systems.",
+        "Queried and transformed data across SQL databases to support cross-system integration workflows and improve downstream data reliability.",
+        "Prototyped AI-powered workflow automations with Claude to reduce repetitive manual processing in operational pipelines.",
+      ],
+    },
+    {
+      org: "White Pass Ski Area",
+      role: "Software Engineer Intern",
+      period: "May 2025 – Aug 2025",
+      location: "Lewis County, WA",
+      bullets: [
+        "Designed and built an employee management system in React and TypeScript for 200+ patrollers, owning the UI end-to-end and reducing shift assignment time by 60%.",
+        "Partnered with dispatchers to prototype responsive UI/UX workflows in Figma, then implemented reusable React components and interaction patterns from those designs.",
+        "Integrated real-time data synchronization with Firebase, enabling instant updates across 200+ concurrent users and reducing data inconsistency errors by 85%.",
+      ],
+    },
   ],
   projects: [
     {
@@ -49,23 +75,12 @@ export const portfolioData: PortfolioData = {
       ],
       liveDemo: "https://gearfitness.app",
       repository: "https://github.com/gear-fitness/gear-fitness-app",
-      note: "Spring Boot, PostgreSQL, React Native, TypeScript, Docker, AWS",
-    },
-    {
-      name: "White Pass Ski Area",
-      summary: "Scheduling tool for 200+ patrollers",
-      image: "/images/white-pass-ski-area.png",
-      stack: ["React", "TypeScript", "Firebase", "REST APIs", "CI/CD"],
-      linkedin:
-        "https://www.linkedin.com/posts/kbcrtz_over-the-summer-i-had-the-opportunity-to-activity-7381021453233639424-kb72",
-      note: "React, TypeScript, Firebase",
     },
     {
       name: "Resume Optimizer Extension",
       summary: "Optimizes resumes with agentic orchestration",
       repository: "https://github.com/kbcrtz/resume-optimizer-extension",
       stack: ["TypeScript", "JavaScript", "Chrome APIs", "REST APIs"],
-      note: "JavaScript, Claude, REST API",
     },
     {
       name: "Machampions",
@@ -74,7 +89,27 @@ export const portfolioData: PortfolioData = {
       stack: ["Next.js", "Tailwind CSS", "TypeScript", "Python", "Vercel"],
       liveDemo: "https://machampions.app",
       repository: "https://github.com/Machampions/Machampions",
-      note: "Next.js, Tailwind CSS, TypeScript, Python",
+    },
+  ],
+  leadership: [
+    {
+      org: "Pacific Lutheran University",
+      role: "President, Computer Science Club",
+      period: "Aug 2024 – Present",
+      location: "Tacoma, WA",
+      bullets: [
+        "Founded and organized LuteHacks, PLU's first hackathon, leading logistics, judging, and sponsorship for a multi-track event focused on web and AI projects.",
+        "Lead a 50+ member technical community by running workshops on React, AI/ML integration, and mock technical interviews.",
+      ],
+    },
+    {
+      org: "Technology Access Foundation",
+      role: "Instructor, Web Development",
+      period: "Jan 2025 – May 2025",
+      location: "Federal Way, WA",
+      bullets: [
+        "Taught HTML, CSS, and JavaScript to 26 students, guiding front-end projects through iterative design and code reviews.",
+      ],
     },
   ],
   contactLinks: [

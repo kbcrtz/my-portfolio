@@ -1,4 +1,4 @@
-import { ExternalLink, Mail } from "lucide-react";
+import { Download, ExternalLink, Mail } from "lucide-react";
 import Section from "../ui/Section";
 import type { ContactLink } from "../../types/portfolio";
 
@@ -31,6 +31,17 @@ const ContactSection = ({ links }: ContactSectionProps) => {
           </li>
         ))}
       </ul>
+
+      <div className="mt-5 flex justify-center sm:mt-6">
+        <a
+          href="/resume.pdf"
+          download
+          className="contactButtonGlow inline-flex items-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 py-2.5 text-sm font-medium text-zinc-700 transition hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:text-zinc-100"
+        >
+          <Download size={14} />
+          Download Resume
+        </a>
+      </div>
     </Section>
   );
 };
