@@ -224,7 +224,10 @@ const GlobeCanvas = ({
           key={location.id}
           location={location}
           position={position}
-          isActive={location.id === activeId}
+          // The single globe dot is the beacon for whichever location is
+          // selected, so it always renders at the active size (consistent
+          // across all 3 locations) rather than only when its own id is active.
+          isActive
           reducedMotion={reducedMotion}
           onSelect={onSelect}
         />
