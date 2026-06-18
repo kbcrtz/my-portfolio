@@ -14,6 +14,14 @@ const HeroSection = ({ name, title, oneLiner }: HeroSectionProps) => {
     const video = videoRef.current;
     if (!video) return;
 
+    // React's `muted` attribute doesn't reliably set the muted *property*, and
+    // iOS only autoplays / auto-resumes video it considers genuinely muted.
+    // Forcing it here is what lets the video pick back up without a tap.
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
     // Respect reduced-motion: hold on the poster frame instead of looping.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       video.removeAttribute("autoplay");
@@ -21,21 +29,28 @@ const HeroSection = ({ name, title, oneLiner }: HeroSectionProps) => {
       return;
     }
 
-    // Mobile browsers pause muted autoplay video when the app is backgrounded
-    // and don't always resume it. Re-play whenever the page becomes visible or
-    // regains focus (e.g. switching back to the tab/app).
-    const resume = () => {
+    // Mobile browsers pause muted autoplay video when the app is backgrounded.
+    // Re-play when the page becomes visible / regains focus; touch & pointer
+    // are kept as a guaranteed user-gesture fallback.
+    const tryPlay = () => {
       if (document.visibilityState === "visible" && video.paused) {
         void video.play().catch(() => {});
       }
     };
-    document.addEventListener("visibilitychange", resume);
-    window.addEventListener("focus", resume);
-    window.addEventListener("pageshow", resume);
+
+    void video.play().catch(() => {});
+    document.addEventListener("visibilitychange", tryPlay);
+    window.addEventListener("focus", tryPlay);
+    window.addEventListener("pageshow", tryPlay);
+    window.addEventListener("pointerdown", tryPlay);
+    window.addEventListener("touchstart", tryPlay, { passive: true });
+
     return () => {
-      document.removeEventListener("visibilitychange", resume);
-      window.removeEventListener("focus", resume);
-      window.removeEventListener("pageshow", resume);
+      document.removeEventListener("visibilitychange", tryPlay);
+      window.removeEventListener("focus", tryPlay);
+      window.removeEventListener("pageshow", tryPlay);
+      window.removeEventListener("pointerdown", tryPlay);
+      window.removeEventListener("touchstart", tryPlay);
     };
   }, []);
 
