@@ -18,6 +18,7 @@ export type Project = {
   name: string;
   summary: string;
   stack: string[];
+  bullets?: string[];
   image?: string;
   liveDemo?: string;
   linkedin?: string;

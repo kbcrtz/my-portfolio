@@ -21,7 +21,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="relative min-h-screen bg-black text-zinc-100">
       <header className="absolute inset-x-0 top-0 z-30">
         <div className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 md:px-10 md:py-6">
           <a href="#hero" className="text-sm font-semibold tracking-tight text-white md:text-base">

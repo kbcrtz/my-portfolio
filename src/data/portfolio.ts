@@ -96,24 +96,34 @@ export const portfolioData: PortfolioData = {
   projects: [
     {
       name: "Gear Fitness",
-      summary: "Production fitness app for 50+ beta users",
+      summary: "Production fitness app for 100+ beta users",
       image: "/images/gear-fitness.png",
       stack: [
+        "React Native",
+        "Expo",
         "Spring Boot",
         "PostgreSQL",
-        "React Native",
         "TypeScript",
         "Docker",
         "AWS",
       ],
       liveDemo: "https://gearfitness.app",
       repository: "https://github.com/gear-fitness/gear-fitness-app",
+      bullets: [
+        "Designed and built a social fitness app end-to-end, growing to 100+ TestFlight users; owned product design, a monochrome design system, and the full React Native frontend.",
+        "Implemented workout tracking, social features, and in-app fitness guidance, including a muscle-activation diagram generator that renders platform-optimized workout visuals for users to share across multiple social channels.",
+        "Architected a Spring Boot backend with 15+ REST endpoints and a PostgreSQL schema of 12+ normalized tables, keeping analytics and feed queries under 100ms.",
+        "Deployed the app on AWS Elastic Beanstalk with Docker and GitHub Actions CI/CD, implementing Google OAuth2/JWT authentication and pre-signed S3 uploads while cutting deployment time by 70%.",
+      ],
     },
     {
       name: "Resume Optimizer Extension",
       summary: "Optimizes resumes with agentic orchestration",
       repository: "https://github.com/kbcrtz/resume-optimizer-extension",
       stack: ["TypeScript", "JavaScript", "Chrome APIs", "REST APIs"],
+      bullets: [
+        "Built a Chrome extension that scrapes job postings, uses Jina AI and the Claude API to tailor a LaTeX resume to the listing, and compiles it to PDF with human-in-the-loop review at each step.",
+      ],
     },
     {
       name: "Machampions",

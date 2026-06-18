@@ -4,9 +4,11 @@ import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import type { GlobeLocation } from "../../types/portfolio";
 
 const CITY_ZOOM = 12;
-// Start fairly zoomed-in so the map picks up roughly where the globe dive left
-// off, then flies the rest of the way into the city — one continuous zoom.
-const START_ZOOM = 6;
+// Start a bit more zoomed-out so the map picks up roughly where the globe dive
+// left off, then flies the rest of the way into the city — one continuous zoom.
+// Lower than CITY_ZOOM purely to give the entrance more zoom-in travel; the
+// final/target zoom (CITY_ZOOM) and center are unchanged.
+const START_ZOOM = 5;
 
 const markerIcon = L.divIcon({
   className: "globeMapMarker",
