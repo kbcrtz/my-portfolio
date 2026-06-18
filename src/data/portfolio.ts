@@ -16,8 +16,8 @@ export const portfolioData: PortfolioData = {
   oneLiner: "Building B2C Applications",
   about: [
     "Hey! I'm a third year Computer Science student at Pacific Lutheran University focused on building practical software that solves real problems.",
-    "My work centers on full-stack applications across React/React Native, TypeScript, Spring Boot, and PostgreSQL, with product-minded execution from architecture to deployment.",
-    "I enjoy shipping user-ready experiences that balance clean engineering with measurable results.",
+    "I grew up in Puyallup, which is where my roots are and where I first got into building things.",
+    "These days I work in Seattle, where my focus is full-stack applications across React/React Native, TypeScript, Spring Boot, and PostgreSQL, with product-minded execution from architecture to deployment. I enjoy shipping user-ready experiences that balance clean engineering with measurable results.",
   ],
   navLinks: [
     { label: "About", href: "#about" },
@@ -151,6 +151,11 @@ export const portfolioData: PortfolioData = {
     {
       label: "LinkedIn",
       href: "https://linkedin.com/in/kbcrtz",
+      external: true,
+    },
+    {
+      label: "Instagram",
+      href: "https://instagram.com/kbcrtz",
       external: true,
     },
   ],

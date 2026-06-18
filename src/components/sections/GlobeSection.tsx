@@ -1,7 +1,15 @@
 import { ArrowLeft } from "lucide-react";
-import { Suspense, lazy, useCallback, useEffect, useRef, useState } from "react";
+import {
+  Suspense,
+  forwardRef,
+  lazy,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import type { GlobeLocation } from "../../types/portfolio";
-import LocationPanel from "../globe/LocationPanel";
 import Reveal from "../ui/Reveal";
 
 const GlobeCanvas = lazy(() => import("../globe/GlobeCanvas"));
@@ -32,12 +40,15 @@ const GlobePoster = () => (
   </div>
 );
 
+export type GlobeHandle = { select: (id: string) => void };
+
 type GlobeSectionProps = {
   locations: GlobeLocation[];
-  isDark: boolean;
 };
 
-const GlobeSection = ({ locations, isDark }: GlobeSectionProps) => {
+const GlobeSection = forwardRef<GlobeHandle, GlobeSectionProps>(({ locations }, ref) => {
+  // The site is dark-only; the globe always renders its dark-theme styling.
+  const isDark = true;
   const defaultId =
     locations.find((location) => location.isDefault)?.id ?? locations[0]?.id ?? "";
   const [activeId, setActiveId] = useState(defaultId);
@@ -70,6 +81,9 @@ const GlobeSection = ({ locations, isDark }: GlobeSectionProps) => {
       setMapLocationId(id);
     }
   }, []);
+
+  // Let other sections (the About text links) drive the globe.
+  useImperativeHandle(ref, () => ({ select: onSelect }), [onSelect]);
 
   // Fired by the globe once it has centered and starts zooming in. A short beat
   // later the Leaflet map dives in, so the centering happens first and in full view.
@@ -154,12 +168,12 @@ const GlobeSection = ({ locations, isDark }: GlobeSectionProps) => {
               ) : null}
             </div>
           </div>
-
-          <LocationPanel locations={locations} activeId={activeId} onSelect={onSelect} />
         </div>
       </Reveal>
     </section>
   );
-};
+});
+
+GlobeSection.displayName = "GlobeSection";
 
 export default GlobeSection;
