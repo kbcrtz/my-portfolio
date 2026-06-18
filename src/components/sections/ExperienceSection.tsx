@@ -40,10 +40,10 @@ const ExperienceSection = ({
                   className="group flex w-full items-start justify-between gap-4 py-6 text-left md:py-8"
                 >
                   <div>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">
+                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-400 transition-colors group-hover:text-zinc-900 dark:text-zinc-500 dark:group-hover:text-zinc-100">
                       {item.period} · {item.location}
                     </p>
-                    <h3 className="mt-2 text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 md:text-2xl">
+                    <h3 className="mt-2 text-xl font-semibold tracking-tight text-zinc-900 transition-transform duration-300 ease-out group-hover:translate-x-1 dark:text-zinc-100 md:text-2xl">
                       {item.org}
                     </h3>
                     <p className="mt-1 text-sm font-medium text-zinc-500 dark:text-zinc-400">

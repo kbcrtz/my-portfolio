@@ -13,6 +13,11 @@ import { latLngToMarkerPosition, latLngToPosition } from "./latLngToPosition";
 const OVERVIEW_RADIUS = 2.95;
 // Only this location shows a dot on the globe overview.
 const GLOBE_MARKER_ID = "seattle";
+// Remaining zoom distance (in scene units) at which the Leaflet map is revealed.
+// The map dives in partway through the zoom while the globe keeps zooming under
+// it. Smaller = reveal later; larger = reveal earlier. Total zoom travel is ~1.95
+// (OVERVIEW_RADIUS → OrbitControls minDistance of 1.0).
+const REVEAL_REMAINING = 0.9;
 
 type GlobeCanvasProps = {
   locations: GlobeLocation[];
@@ -54,6 +59,9 @@ const GlobeControls = ({
   const hasSelected = useRef(false);
   // 0 = idle, 1 = centering (rotate at overview distance), 2 = zooming (radius).
   const phase = useRef(0);
+  // True while a selection is zooming in and still owes a map reveal. The reveal
+  // is held until the globe has zoomed most of the way in (see useFrame).
+  const pendingReveal = useRef(false);
   const zoomInRadius = useRef(1.2);
   // Target camera position in spherical coords (radius, polar phi, azimuth theta).
   const target = useRef(new THREE.Spherical(OVERVIEW_RADIUS, Math.PI / 2, 0));
@@ -84,6 +92,7 @@ const GlobeControls = ({
     } else {
       phase.current = 1;
       focusing.current = true;
+      pendingReveal.current = true;
     }
     // Only re-run on an actual selection, not when activeLocation identity changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -138,13 +147,20 @@ const GlobeControls = ({
       const centered = Math.abs(deltaTheta) < 0.012 && Math.abs(deltaPhi) < 0.012;
 
       if (phase.current === 1) {
-        // Centering done → begin the zoom-in and let the map dive in.
+        // Centering done → begin the zoom-in (the map reveal is held until the
+        // globe has zoomed most of the way in, in phase 2 below).
         if (centered) {
           phase.current = 2;
           target.current.radius = zoomInRadius.current;
-          onZoomPhase();
         }
       } else if (phase.current === 2) {
+        // Once the remaining zoom distance is small, the globe has zoomed in far
+        // enough — let the map dive in. Guarded by pendingReveal so this only
+        // fires for a selection zoom-in, not the zoom-out when the map closes.
+        if (pendingReveal.current && Math.abs(deltaRadius) < REVEAL_REMAINING) {
+          pendingReveal.current = false;
+          onZoomPhase();
+        }
         if (centered && Math.abs(deltaRadius) < 0.01) {
           phase.current = 0;
           focusing.current = false;
@@ -161,7 +177,7 @@ const GlobeControls = ({
       makeDefault
       enablePan={false}
       enableZoom={false}
-      minDistance={1.2}
+      minDistance={1.0}
       maxDistance={3.4}
       enableDamping
       dampingFactor={0.08}

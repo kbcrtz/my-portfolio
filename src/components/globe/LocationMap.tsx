@@ -8,7 +8,7 @@ const CITY_ZOOM = 12;
 // left off, then flies the rest of the way into the city — one continuous zoom.
 // Lower than CITY_ZOOM purely to give the entrance more zoom-in travel; the
 // final/target zoom (CITY_ZOOM) and center are unchanged.
-const START_ZOOM = 5;
+const START_ZOOM = 5.5;
 
 const markerIcon = L.divIcon({
   className: "globeMapMarker",

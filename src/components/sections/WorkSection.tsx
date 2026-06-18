@@ -53,10 +53,6 @@ const WorkSection = ({ id, title, subtitle, projects }: WorkSectionProps) => {
                     hasDetails ? "cursor-pointer" : ""
                   }`}
                 >
-                  <span className="mt-1.5 font-mono text-[11px] text-zinc-400 transition-colors group-hover:text-zinc-900 dark:text-zinc-600 dark:group-hover:text-zinc-100">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-4">
                       <h3 className="text-xl font-semibold tracking-tight text-zinc-900 transition-transform duration-300 ease-out group-hover:translate-x-1 dark:text-zinc-100 md:text-2xl">
@@ -92,7 +88,7 @@ const WorkSection = ({ id, title, subtitle, projects }: WorkSectionProps) => {
                     <p className="mt-2 max-w-xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                       {project.summary}
                     </p>
-                    <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">
+                    <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-400 transition-colors group-hover:text-zinc-900 dark:text-zinc-500 dark:group-hover:text-zinc-100">
                       {project.stack.join(" · ")}
                     </p>
 
