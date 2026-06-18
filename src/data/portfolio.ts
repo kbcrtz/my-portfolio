@@ -56,7 +56,6 @@ export const portfolioData: PortfolioData = {
       accentColor: "#ef4444",
       story:
         "Pacific Lutheran University, where I study Computer Science, founded the CS Club and LuteHacks, and turned a hobby into a craft.",
-      isDefault: true,
     },
     {
       id: "seattle",
@@ -67,6 +66,7 @@ export const portfolioData: PortfolioData = {
       accentColor: "#ef4444",
       story:
         "Seattle — where I put it to work, shipping software at Proliance Surgeons and building in the Pacific Northwest tech scene.",
+      isDefault: true,
     },
   ],
   experience: [

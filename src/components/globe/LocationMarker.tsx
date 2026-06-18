@@ -26,7 +26,7 @@ const LocationMarker = ({
     const ring = ringRef.current;
     if (!ring || reducedMotion) return;
     const pulse = (Math.sin(state.clock.elapsedTime * 2.4) + 1) / 2;
-    ring.scale.setScalar(1 + pulse * (isActive ? 1.6 : 0.9));
+    ring.scale.setScalar(1 + pulse * (isActive ? 1.9 : 1.1));
     (ring.material as THREE.MeshBasicMaterial).opacity =
       (1 - pulse) * (isActive ? 0.85 : 0.4);
   });
@@ -52,20 +52,20 @@ const LocationMarker = ({
       {/* Invisible hit target — kept larger than the dot so the tiny pinpoint
           stays tappable. */}
       <mesh onPointerOver={handleOver} onPointerOut={handleOut} onClick={handleClick}>
-        <sphereGeometry args={[0.014, 12, 12]} />
+        <sphereGeometry args={[0.026, 12, 12]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
 
       {/* Visible marker dot. */}
       <mesh scale={dotScale}>
-        <sphereGeometry args={[0.006, 16, 16]} />
+        <sphereGeometry args={[0.012, 16, 16]} />
         <meshBasicMaterial color={location.accentColor} toneMapped={false} />
       </mesh>
 
       {/* Pulsing / static beacon ring, always facing the camera. */}
       <Billboard>
         <mesh ref={ringRef} scale={isActive ? 1.6 : 1}>
-          <ringGeometry args={[0.0085, 0.013, 32]} />
+          <ringGeometry args={[0.018, 0.026, 32]} />
           <meshBasicMaterial
             color={location.accentColor}
             transparent
