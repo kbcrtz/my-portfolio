@@ -4,7 +4,7 @@ import * as THREE from "three";
 import type { StackItem } from "../../types/portfolio";
 import { getLogoStarPoints } from "./logoStarPoints";
 
-const STAR_COUNT = 1500;
+const STAR_COUNT = 2000;
 // World-unit size of a formed logo's larger dimension. Camera sits at z=6
 // with fov 42, so the visible plane at z=0 is ~4.6 world units tall.
 const LOGO_SIZE = 2.7;
@@ -103,8 +103,8 @@ const createStarTexture = () => {
       size / 2,
     );
     gradient.addColorStop(0, "rgba(255,255,255,1)");
-    gradient.addColorStop(0.28, "rgba(255,255,255,0.85)");
-    gradient.addColorStop(0.62, "rgba(255,255,255,0.18)");
+    gradient.addColorStop(0.38, "rgba(255,255,255,0.92)");
+    gradient.addColorStop(0.68, "rgba(255,255,255,0.28)");
     gradient.addColorStop(1, "rgba(255,255,255,0)");
     context.fillStyle = gradient;
     context.fillRect(0, 0, size, size);
@@ -227,8 +227,8 @@ const StarField = ({
 
           tinted
             .copy(base)
-            .lerp(WHITE, Math.random() * 0.3)
-            .multiplyScalar(0.85 + Math.random() * 0.55);
+            .lerp(WHITE, Math.random() * 0.18)
+            .multiplyScalar(1.05 + Math.random() * 0.45);
           targetColors[i * 3] = tinted.r;
           targetColors[i * 3 + 1] = tinted.g;
           targetColors[i * 3 + 2] = tinted.b;
@@ -295,7 +295,7 @@ const StarField = ({
 
       const twinkle = reducedMotion
         ? 1
-        : 0.82 + 0.18 * Math.sin(time * (0.8 + speed * 1.6) + seed * 5);
+        : 0.88 + 0.12 * Math.sin(time * (0.8 + speed * 1.6) + seed * 5);
       for (let channel = 0; channel < 3; channel += 1) {
         colorState[base + channel] +=
           (targetColors[base + channel] - colorState[base + channel]) *
@@ -341,7 +341,7 @@ const StarField = ({
           transparent
           depthWrite={false}
           blending={THREE.AdditiveBlending}
-          size={isMobile ? 0.06 : 0.052}
+          size={isMobile ? 0.07 : 0.058}
           sizeAttenuation
         />
       </points>
