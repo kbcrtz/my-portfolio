@@ -416,32 +416,21 @@ html.light .globeMapOverlay .leaflet-container {
   }
 }
 
-/* Default icon: white in dark mode, dark in light mode (see html.light below) */
-.stackTechIcon {
-  color: #ffffff;
+/* Stack star-field carousel: the name strip scrolls but hides its scrollbar. */
+.stackCarouselList {
+  scrollbar-width: none;
 }
 
-html.light .stackTechIcon {
-  color: #18181b;
+.stackCarouselList::-webkit-scrollbar {
+  display: none;
 }
 
-.stackTechCard:hover .stackTechIcon,
-.stackTechCard:focus-within .stackTechIcon {
-  color: var(--tech-color);
+/* Center the strip when everything fits; degrades to normal scrolling when
+   the names overflow (auto margins collapse instead of clipping content). */
+.stackCarouselList > :first-child {
+  margin-left: auto;
 }
 
-.stackTechCard:hover,
-.stackTechCard:focus-within {
-  border-color: var(--tech-color);
-  box-shadow:
-    0 0 0 1px var(--tech-color),
-    0 0 14px color-mix(in srgb, var(--tech-color) 35%, transparent);
-}
-
-html.dark .stackTechCard:hover,
-html.dark .stackTechCard:focus-within {
-  box-shadow:
-    0 0 0 1px var(--tech-color),
-    0 0 20px color-mix(in srgb, var(--tech-color) 65%, transparent),
-    0 0 34px color-mix(in srgb, var(--tech-color) 35%, transparent);
+.stackCarouselList > :last-child {
+  margin-right: auto;
 }

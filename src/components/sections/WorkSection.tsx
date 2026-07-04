@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowUpRight, ChevronDown, Github } from "lucide-react";
-import { FaLinkedin } from "react-icons/fa";
+import { FaApple, FaLinkedin } from "react-icons/fa";
 import Section from "../ui/Section";
 import Reveal from "../ui/Reveal";
 import type { Project } from "../../types/portfolio";
@@ -93,15 +93,15 @@ const WorkSection = ({ id, title, subtitle, projects }: WorkSectionProps) => {
                     </p>
 
                     <div className="mt-4 flex flex-wrap gap-5">
-                      {project.liveDemo ? (
+                      {project.appStore ? (
                         <a
-                          href={project.liveDemo}
+                          href={project.appStore}
                           target="_blank"
                           rel="noreferrer"
                           onClick={stop}
                           className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-zinc-600 underline-offset-4 transition hover:text-zinc-900 hover:underline dark:text-zinc-300 dark:hover:text-zinc-50"
                         >
-                          Live <ArrowUpRight size={13} />
+                          <FaApple size={13} /> App Store
                         </a>
                       ) : null}
                       {project.repository ? (
@@ -113,6 +113,17 @@ const WorkSection = ({ id, title, subtitle, projects }: WorkSectionProps) => {
                           className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-zinc-600 underline-offset-4 transition hover:text-zinc-900 hover:underline dark:text-zinc-300 dark:hover:text-zinc-50"
                         >
                           <Github size={13} /> GitHub
+                        </a>
+                      ) : null}
+                      {project.liveDemo ? (
+                        <a
+                          href={project.liveDemo}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={stop}
+                          className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-zinc-600 underline-offset-4 transition hover:text-zinc-900 hover:underline dark:text-zinc-300 dark:hover:text-zinc-50"
+                        >
+                          Live <ArrowUpRight size={13} />
                         </a>
                       ) : null}
                       {project.linkedin ? (

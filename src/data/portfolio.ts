@@ -96,7 +96,7 @@ export const portfolioData: PortfolioData = {
   projects: [
     {
       name: "Gear Fitness",
-      summary: "Production fitness app for 100+ beta users",
+      summary: "Production fitness app with 100+ users",
       image: "/images/gear-fitness.png",
       stack: [
         "React Native",
@@ -108,9 +108,11 @@ export const portfolioData: PortfolioData = {
         "AWS",
       ],
       liveDemo: "https://gearfitness.app",
+      appStore:
+        "https://apps.apple.com/us/app/gear-workout-tracker-gym-log/id6756771550",
       repository: "https://github.com/gear-fitness/gear-fitness-app",
       bullets: [
-        "Designed and built a social fitness app end-to-end, growing to 100+ TestFlight users; owned product design, a monochrome design system, and the full React Native frontend.",
+        "Designed and built a social fitness app end-to-end, shipped to the App Store with 100+ users; owned product design, a monochrome design system, and the full React Native frontend.",
         "Implemented workout tracking, social features, and in-app fitness guidance, including a muscle-activation diagram generator that renders platform-optimized workout visuals for users to share across multiple social channels.",
         "Architected a Spring Boot backend with 15+ REST endpoints and a PostgreSQL schema of 12+ normalized tables, keeping analytics and feed queries under 100ms.",
         "Deployed the app on AWS Elastic Beanstalk with Docker and GitHub Actions CI/CD, implementing Google OAuth2/JWT authentication and pre-signed S3 uploads while cutting deployment time by 70%.",

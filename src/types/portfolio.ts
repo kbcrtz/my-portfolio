@@ -21,6 +21,7 @@ export type Project = {
   bullets?: string[];
   image?: string;
   liveDemo?: string;
+  appStore?: string;
   linkedin?: string;
   repository?: string;
 };

@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import Section from "../ui/Section";
 
 type AboutSectionProps = {
   paragraphs: string[];
@@ -18,7 +17,7 @@ const linkPattern = new RegExp(`(${LOCATION_LINKS.map((l) => l.phrase).join("|")
 
 const AboutSection = ({ paragraphs, onSelectLocation }: AboutSectionProps) => {
   return (
-    <Section id="about" title="About">
+    <section id="about" className="scroll-mt-20 py-8 md:scroll-mt-24 md:py-14">
       <div className="max-w-3xl space-y-3 text-sm text-zinc-300 md:space-y-4 md:text-base">
         {paragraphs.map((paragraph) => (
           <p key={paragraph} className="leading-relaxed">
@@ -39,7 +38,7 @@ const AboutSection = ({ paragraphs, onSelectLocation }: AboutSectionProps) => {
           </p>
         ))}
       </div>
-    </Section>
+    </section>
   );
 };
 

@@ -44,20 +44,6 @@ const App = () => {
               })}
             </span>
           </a>
-          <nav
-            aria-label="Primary"
-            className="hidden items-center gap-5 md:absolute md:left-1/2 md:flex md:-translate-x-1/2"
-          >
-            {portfolioData.navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-white/80 transition hover:text-white"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
         </div>
       </header>
 
@@ -67,29 +53,33 @@ const App = () => {
         oneLiner={portfolioData.oneLiner}
       />
 
-      <main className="mx-auto w-full max-w-[38.25rem] px-3 pb-10 pt-8 md:px-6 md:pb-16 md:pt-12">
+      <main className="mx-auto w-full max-w-[66.9375rem] px-3 pb-10 pt-8 md:px-6 md:pb-16 md:pt-12">
         <StackSection stack={portfolioData.stack} />
-        <GlobeSection ref={globeRef} locations={portfolioData.globeLocations} />
-        <AboutSection
-          paragraphs={portfolioData.about}
-          onSelectLocation={selectGlobeLocation}
-        />
-        <ExperienceSection
-          id="experience"
-          title="Experience"
-          items={portfolioData.experience}
-        />
-        <WorkSection
-          id="projects"
-          title="Projects"
-          projects={portfolioData.projects}
-        />
-        <ExperienceSection
-          id="leadership"
-          title="Leadership"
-          items={portfolioData.leadership}
-        />
-        <ContactSection links={portfolioData.contactLinks} />
+        <div className="lg:grid lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-center lg:gap-10">
+          <GlobeSection ref={globeRef} locations={portfolioData.globeLocations} />
+          <AboutSection
+            paragraphs={portfolioData.about}
+            onSelectLocation={selectGlobeLocation}
+          />
+        </div>
+        <div className="mx-auto w-full max-w-[47.8125rem]">
+          <ExperienceSection
+            id="experience"
+            title="Experience"
+            items={portfolioData.experience}
+          />
+          <WorkSection
+            id="projects"
+            title="Projects"
+            projects={portfolioData.projects}
+          />
+          <ExperienceSection
+            id="leadership"
+            title="Leadership"
+            items={portfolioData.leadership}
+          />
+          <ContactSection links={portfolioData.contactLinks} />
+        </div>
       </main>
     </div>
   );
