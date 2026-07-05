@@ -226,7 +226,9 @@ const GlobeCanvas = ({
 
   return (
     <Canvas
-      camera={{ position: [0, 0.2, 2.95], fov: 45, near: 0.05, far: 100 }}
+      // Start tilted ~36° above the equator so the north pole leans toward the
+      // viewer and the Seattle marker (47.6°N) reads clearly on the overview.
+      camera={{ position: [0, 1.75, 2.375], fov: 45, near: 0.05, far: 100 }}
       dpr={[1, isMobile ? 1.5 : 2]}
       frameloop={reducedMotion ? "demand" : "always"}
       gl={{ antialias: !isMobile, powerPreference: "high-performance" }}

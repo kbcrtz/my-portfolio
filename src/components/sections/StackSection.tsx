@@ -11,8 +11,9 @@ import type { StackItem } from "../../types/portfolio";
 
 const StackStarCanvas = lazy(() => import("../stack/StackStarCanvas"));
 
-// The carousel cycles on its own until the user takes over.
-const AUTO_ADVANCE_MS = 4500;
+// Dwell time on each logo. Manual selection resets the clock rather than
+// stopping the rotation — the carousel always keeps cycling while visible.
+const AUTO_ADVANCE_MS = 3500;
 
 const useMediaQuery = (query: string) => {
   const [matches, setMatches] = useState(
@@ -38,7 +39,9 @@ const StackSection = ({ stack }: StackSectionProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [shouldMount, setShouldMount] = useState(false);
   const [inView, setInView] = useState(false);
-  const [autoPlay, setAutoPlay] = useState(true);
+  // Stars stay scattered until the section is first seen, so the visitor
+  // watches them assemble into the first logo. Never flips back off.
+  const [started, setStarted] = useState(false);
   const frameRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -64,32 +67,36 @@ const StackSection = ({ stack }: StackSectionProps) => {
     return () => observer.disconnect();
   }, []);
 
-  // Track actual visibility separately so auto-advance pauses offscreen.
+  // Track actual visibility separately so auto-advance pauses offscreen, and
+  // kick off the first logo formation the first time the section is seen.
   useEffect(() => {
     const node = frameRef.current;
     if (!node) return;
     const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+        if (entry.isIntersecting) setStarted(true);
+      },
       { threshold: 0.35 },
     );
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
+  // A timeout keyed on activeIndex (rather than an interval) means every
+  // change — automatic or user-selected — gets the full dwell time before
+  // the carousel moves on.
   useEffect(() => {
-    if (!autoPlay || !inView || !shouldMount || reducedMotion) return;
-    const id = window.setInterval(
+    if (!started || !inView || !shouldMount || reducedMotion) return;
+    const id = window.setTimeout(
       () => setActiveIndex((index) => (index + 1) % stack.length),
       AUTO_ADVANCE_MS,
     );
-    return () => window.clearInterval(id);
-  }, [autoPlay, inView, shouldMount, reducedMotion, stack.length]);
+    return () => window.clearTimeout(id);
+  }, [activeIndex, started, inView, shouldMount, reducedMotion, stack.length]);
 
   const select = useCallback(
-    (index: number) => {
-      setAutoPlay(false);
-      setActiveIndex((index + stack.length) % stack.length);
-    },
+    (index: number) => setActiveIndex((index + stack.length) % stack.length),
     [stack.length],
   );
 
@@ -103,14 +110,18 @@ const StackSection = ({ stack }: StackSectionProps) => {
   }, [activeIndex, reducedMotion]);
 
   return (
-    <div className="-mt-2 mb-6 md:-mt-4 md:mb-10">
-      <div ref={frameRef} className="relative overflow-hidden rounded-lg bg-black">
-        <div className="relative aspect-[4/3] w-full sm:aspect-[16/10]">
+    <section id="stack" className="relative bg-black px-3 py-6 md:h-svh md:p-0">
+      <div
+        ref={frameRef}
+        className="relative h-full w-full overflow-hidden rounded-lg md:rounded-none"
+      >
+        <div className="relative aspect-[4/3] w-full md:aspect-auto md:h-full">
           {shouldMount ? (
             <Suspense fallback={null}>
               <StackStarCanvas
                 items={stack}
                 activeIndex={activeIndex}
+                formLogos={started}
                 reducedMotion={reducedMotion}
                 isMobile={isMobile}
               />
@@ -118,8 +129,13 @@ const StackSection = ({ stack }: StackSectionProps) => {
           ) : null}
         </div>
 
+        {/* Section label, kept subtle so the star canvas stays the focus. */}
+        <p className="pointer-events-none absolute left-3 top-3 z-10 font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-500 md:left-6 md:top-6">
+          my toolkit
+        </p>
+
         <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black via-black/70 to-transparent pb-2 pt-10 md:pb-2.5">
-          <div className="flex items-center gap-0.5 px-1.5 md:px-2">
+          <div className="mx-auto flex w-full max-w-[66.9375rem] items-center gap-0.5 px-1.5 md:px-2">
             <button
               type="button"
               aria-label="Previous technology"
@@ -185,7 +201,7 @@ const StackSection = ({ stack }: StackSectionProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

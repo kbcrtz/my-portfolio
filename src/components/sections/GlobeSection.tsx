@@ -130,12 +130,12 @@ const GlobeSection = forwardRef<GlobeHandle, GlobeSectionProps>(
     return (
       <section
         id="globe"
-        className="scroll-mt-20 py-8 md:scroll-mt-24 md:py-14"
+        className="scroll-mt-20 py-4 md:scroll-mt-24 lg:py-0"
       >
         <Reveal>
           <div className="flex flex-col gap-4">
             <div ref={frameRef} className="relative overflow-hidden rounded-lg">
-              <div className="relative aspect-square w-full sm:aspect-[4/3]">
+              <div className="relative aspect-square max-h-[70svh] w-full sm:aspect-[4/3]">
                 <Suspense fallback={<GlobePoster />}>
                   {shouldMount ? (
                     <GlobeCanvas

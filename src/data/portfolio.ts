@@ -13,7 +13,7 @@ export const portfolioData: PortfolioData = {
   name: "Kobe Cortez",
   title: "Full Stack Software Engineer",
   location: "Tacoma, WA",
-  oneLiner: "Building B2C Applications",
+  oneLiner: "Designing products people *feel*",
   about: [
     "Hey! I'm a third year Computer Science student at Pacific Lutheran University focused on building practical software that solves real problems.",
     "I grew up in Puyallup, which is where my roots are and where I first got into building things.",
@@ -118,23 +118,24 @@ export const portfolioData: PortfolioData = {
         "Deployed the app on AWS Elastic Beanstalk with Docker and GitHub Actions CI/CD, implementing Google OAuth2/JWT authentication and pre-signed S3 uploads while cutting deployment time by 70%.",
       ],
     },
-    {
-      name: "Resume Optimizer Extension",
-      summary: "Optimizes resumes with agentic orchestration",
-      repository: "https://github.com/kbcrtz/resume-optimizer-extension",
-      stack: ["TypeScript", "JavaScript", "Chrome APIs", "REST APIs"],
-      bullets: [
-        "Built a Chrome extension that scrapes job postings, uses Jina AI and the Claude API to tailor a LaTeX resume to the listing, and compiles it to PDF with human-in-the-loop review at each step.",
-      ],
-    },
-    {
-      name: "Machampions",
-      summary: "Pokemon Champions battle assistant",
-      image: "/images/machampions.png",
-      stack: ["Next.js", "Tailwind CSS", "TypeScript", "Python", "Vercel"],
-      liveDemo: "https://machampions.app",
-      repository: "https://github.com/Machampions/Machampions",
-    },
+    // Hidden from the site for now — uncomment to bring back.
+    // {
+    //   name: "Resume Optimizer Extension",
+    //   summary: "Optimizes resumes with agentic orchestration",
+    //   repository: "https://github.com/kbcrtz/resume-optimizer-extension",
+    //   stack: ["TypeScript", "JavaScript", "Chrome APIs", "REST APIs"],
+    //   bullets: [
+    //     "Built a Chrome extension that scrapes job postings, uses Jina AI and the Claude API to tailor a LaTeX resume to the listing, and compiles it to PDF with human-in-the-loop review at each step.",
+    //   ],
+    // },
+    // {
+    //   name: "Machampions",
+    //   summary: "Pokemon Champions battle assistant",
+    //   image: "/images/machampions.png",
+    //   stack: ["Next.js", "Tailwind CSS", "TypeScript", "Python", "Vercel"],
+    //   liveDemo: "https://machampions.app",
+    //   repository: "https://github.com/Machampions/Machampions",
+    // },
   ],
   leadership: [
     {

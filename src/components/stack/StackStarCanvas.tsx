@@ -117,6 +117,9 @@ const createStarTexture = () => {
 type StarFieldProps = {
   items: StackItem[];
   activeIndex: number;
+  // Until true, stars hold their scattered idle field instead of forming a
+  // logo — the section flips this on first scroll into view.
+  formLogos: boolean;
   reducedMotion: boolean;
   isMobile: boolean;
 };
@@ -124,6 +127,7 @@ type StarFieldProps = {
 const StarField = ({
   items,
   activeIndex,
+  formLogos,
   reducedMotion,
   isMobile,
 }: StarFieldProps) => {
@@ -195,7 +199,7 @@ const StarField = ({
   // On each selection, retarget every star to a sampled point of that logo
   // (ambient stars keep their scattered home so the sky never fully empties).
   useEffect(() => {
-    const item = items[activeIndex];
+    const item = formLogos ? items[activeIndex] : undefined;
     const { targets, targetColors, home, logoDepth } = store;
 
     if (!item) {
@@ -249,7 +253,7 @@ const StarField = ({
     return () => {
       stale = true;
     };
-  }, [activeIndex, items, store, invalidate]);
+  }, [activeIndex, formLogos, items, store, invalidate]);
 
   useFrame((state, delta) => {
     const {
@@ -265,7 +269,7 @@ const StarField = ({
     const time = state.clock.elapsedTime;
     const step = Math.min(delta, 0.05);
     // Frame-rate independent easing; reduced motion snaps straight to target.
-    const damp = reducedMotion ? 1 : 1 - Math.pow(0.06, step);
+    const damp = reducedMotion ? 1 : 1 - Math.pow(0.04, step);
     const colorDamp = reducedMotion ? 1 : 1 - Math.pow(0.02, step);
 
     formed.current += (formedTarget.current - formed.current) * damp;
@@ -354,6 +358,7 @@ type StackStarCanvasProps = StarFieldProps;
 const StackStarCanvas = ({
   items,
   activeIndex,
+  formLogos,
   reducedMotion,
   isMobile,
 }: StackStarCanvasProps) => (
@@ -366,6 +371,7 @@ const StackStarCanvas = ({
     <StarField
       items={items}
       activeIndex={activeIndex}
+      formLogos={formLogos}
       reducedMotion={reducedMotion}
       isMobile={isMobile}
     />

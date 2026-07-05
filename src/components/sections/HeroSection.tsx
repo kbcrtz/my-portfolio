@@ -55,10 +55,10 @@ const HeroSection = ({ name, title, oneLiner }: HeroSectionProps) => {
   }, []);
 
   return (
-    <section id="hero" className="relative scroll-mt-16 md:scroll-mt-20">
+    <section id="hero" className="relative h-svh scroll-mt-16 md:scroll-mt-20">
       <video
         ref={videoRef}
-        className="block aspect-[2.55/1] min-h-[340px] w-full object-cover object-[50%_60%]"
+        className="absolute inset-0 h-full w-full object-cover object-[50%_60%]"
         autoPlay
         loop
         muted
@@ -74,7 +74,7 @@ const HeroSection = ({ name, title, oneLiner }: HeroSectionProps) => {
 
       {/* Headline + CTAs, aligned to the content column. */}
       <div className="absolute inset-x-0 bottom-0">
-        <div className="mx-auto w-full max-w-[38.25rem] px-3 pb-6 md:px-6 md:pb-10">
+        <div className="mx-auto w-full max-w-[38.25rem] px-3 pb-10 md:px-6 md:pb-16">
           <h1 className="text-3xl font-semibold tracking-tight text-white md:text-5xl">
             {name}
           </h1>
@@ -82,7 +82,16 @@ const HeroSection = ({ name, title, oneLiner }: HeroSectionProps) => {
             {title}
           </p>
           <p className="mt-1.5 max-w-xl text-xs italic leading-relaxed text-zinc-300 [font-family:'Fira_Code','JetBrains_Mono','IBM_Plex_Mono',Menlo,Monaco,Consolas,'Liberation_Mono','Courier_New',monospace] md:mt-2 md:text-sm">
-            {oneLiner}
+            {/* Words wrapped in *asterisks* in the data render emphasized. */}
+            {oneLiner.split(/\*([^*]+)\*/g).map((part, index) =>
+              index % 2 === 1 ? (
+                <em key={index} className="text-white">
+                  {part}
+                </em>
+              ) : (
+                part
+              ),
+            )}
           </p>
           <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-3">
             <a

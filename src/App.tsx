@@ -15,8 +15,10 @@ const App = () => {
   const globeRef = useRef<GlobeHandle>(null);
 
   // Clicking a location word in the About copy scrolls to the globe and dives it.
+  // Target the full-screen globe/about wrapper (not the globe itself, which is
+  // centered inside it) so the viewport lands exactly on that screen.
   const selectGlobeLocation = useCallback((id: string) => {
-    document.getElementById("globe")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById("about-globe")?.scrollIntoView({ behavior: "smooth", block: "start" });
     globeRef.current?.select(id);
   }, []);
 
@@ -53,15 +55,27 @@ const App = () => {
         oneLiner={portfolioData.oneLiner}
       />
 
-      <main className="mx-auto w-full max-w-[66.9375rem] px-3 pb-10 pt-8 md:px-6 md:pb-16 md:pt-12">
-        <StackSection stack={portfolioData.stack} />
-        <div className="lg:grid lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-center lg:gap-10">
+      <StackSection stack={portfolioData.stack} />
+
+      {/* Full-width so the section label can pin to the screen edge, mirroring
+          the stack section's "my toolkit"; content stays in the site column. */}
+      <section className="relative">
+        <p className="pointer-events-none absolute left-3 top-3 z-10 font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-500 md:left-6 md:top-6">
+          about kobe
+        </p>
+        <div
+          id="about-globe"
+          className="mx-auto flex min-h-svh w-full max-w-[66.9375rem] flex-col justify-center px-3 md:px-6 lg:grid lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-center lg:gap-10"
+        >
           <GlobeSection ref={globeRef} locations={portfolioData.globeLocations} />
           <AboutSection
             paragraphs={portfolioData.about}
             onSelectLocation={selectGlobeLocation}
           />
         </div>
+      </section>
+
+      <main className="mx-auto w-full max-w-[66.9375rem] px-3 pb-10 md:px-6 md:pb-16">
         <div className="mx-auto w-full max-w-[47.8125rem]">
           <ExperienceSection
             id="experience"

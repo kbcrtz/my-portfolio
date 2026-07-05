@@ -17,7 +17,7 @@ const linkPattern = new RegExp(`(${LOCATION_LINKS.map((l) => l.phrase).join("|")
 
 const AboutSection = ({ paragraphs, onSelectLocation }: AboutSectionProps) => {
   return (
-    <section id="about" className="scroll-mt-20 py-8 md:scroll-mt-24 md:py-14">
+    <section id="about" className="scroll-mt-20 py-4 md:scroll-mt-24 lg:py-0">
       <div className="max-w-3xl space-y-3 text-sm text-zinc-300 md:space-y-4 md:text-base">
         {paragraphs.map((paragraph) => (
           <p key={paragraph} className="leading-relaxed">
