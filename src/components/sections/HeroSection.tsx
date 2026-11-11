@@ -1,5 +1,20 @@
-import { ArrowRight } from "lucide-react";
 import { useEffect, useRef } from "react";
+
+// Wide, shallow chevron for the scroll cue; lucide's is too narrow.
+const WideChevron = () => (
+  <svg width="32" height="11" viewBox="0 0 44 14" fill="none" aria-hidden="true">
+    <path
+      d="M2 2l20 10L42 2"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const brandText = "kobe cortez";
+const isVowel = (char: string) => "aeiou".includes(char.toLowerCase());
 
 type HeroSectionProps = {
   name: string;
@@ -72,6 +87,31 @@ const HeroSection = ({ name, title, oneLiner }: HeroSectionProps) => {
       {/* Dark scrim (top for the nav, bottom for the headline) over the footage. */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-black/55" />
 
+      {/* Brand, pinned to the section's top-left like the other section labels. */}
+      <a
+        href="#hero"
+        className="absolute left-3 top-3 z-10 text-sm font-semibold tracking-tight text-white md:left-6 md:top-6 md:text-base"
+      >
+        <span className="sr-only">kbcrtz</span>
+        <span aria-hidden="true" className="brandMorph">
+          {brandText.split("").map((char, index) => {
+            const isSpace = char === " ";
+            const className = [
+              "brandMorphChar",
+              isSpace ? "brandMorphSpace" : isVowel(char) ? "brandMorphVowel" : "",
+            ]
+              .filter(Boolean)
+              .join(" ");
+
+            return (
+              <span key={`${char}-${index}`} className={className}>
+                {char}
+              </span>
+            );
+          })}
+        </span>
+      </a>
+
       {/* Headline + CTAs, aligned to the content column. */}
       <div className="absolute inset-x-0 bottom-0">
         <div className="mx-auto w-full max-w-[38.25rem] px-3 pb-10 md:px-6 md:pb-16">
@@ -93,21 +133,24 @@ const HeroSection = ({ name, title, oneLiner }: HeroSectionProps) => {
               ),
             )}
           </p>
-          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-3">
-            <a
-              href="#projects"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-100 sm:w-auto"
-            >
-              View Projects <ArrowRight size={16} />
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex w-full items-center justify-center rounded-lg border border-white/50 px-4 py-2 text-sm font-semibold text-white transition hover:border-white hover:bg-white/10 sm:w-auto"
-            >
-              Contact
-            </a>
-          </div>
         </div>
+      </div>
+
+      {/* Scroll cue. Bounce lives on the inner element so it doesn't fight the
+          centering translate on the outer one. */}
+      <div className="absolute bottom-1 left-1/2 z-10 -translate-x-1/2">
+        <a
+          href="#stack"
+          aria-label="Scroll to my toolkit"
+          onClick={(event) => {
+            event.preventDefault();
+            document.getElementById("stack")?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+          className="flex animate-[bounce_2.8s_ease-in-out_infinite] flex-col items-center gap-0.5 p-2 text-white/50 transition hover:text-white"
+        >
+          <WideChevron />
+          <WideChevron />
+        </a>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { Download, Mail } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import Section from "../ui/Section";
 import type { ContactLink } from "../../types/portfolio";
 
@@ -11,6 +12,7 @@ const iconFor = (label: string) => {
   if (label === "GitHub") return <FaGithub size={22} />;
   if (label === "LinkedIn") return <FaLinkedinIn size={20} />;
   if (label === "Instagram") return <FaInstagram size={21} />;
+  if (label === "X") return <FaXTwitter size={19} />;
   return <Mail size={20} />;
 };
 

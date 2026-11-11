@@ -171,5 +171,6 @@ export const portfolioData: PortfolioData = {
       href: "https://instagram.com/kbcrtz",
       external: true,
     },
+    { label: "X", href: "https://x.com/kbcrtz", external: true },
   ],
 };

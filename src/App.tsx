@@ -8,9 +8,6 @@ import StackSection from "./components/sections/StackSection";
 import WorkSection from "./components/sections/WorkSection";
 import { portfolioData } from "./data/portfolio";
 
-const headerBrandText = "kobe cortez";
-const isVowel = (char: string) => "aeiou".includes(char.toLowerCase());
-
 const App = () => {
   const globeRef = useRef<GlobeHandle>(null);
 
@@ -24,28 +21,19 @@ const App = () => {
 
   return (
     <div className="relative min-h-screen bg-black text-zinc-100">
-      <header className="absolute inset-x-0 top-0 z-30">
-        <div className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 md:px-10 md:py-6">
-          <a href="#hero" className="text-sm font-semibold tracking-tight text-white md:text-base">
-            <span className="sr-only">kbcrtz</span>
-            <span aria-hidden="true" className="brandMorph">
-              {headerBrandText.split("").map((char, index) => {
-                const isSpace = char === " ";
-                const className = [
-                  "brandMorphChar",
-                  isSpace ? "brandMorphSpace" : isVowel(char) ? "brandMorphVowel" : "",
-                ]
-                  .filter(Boolean)
-                  .join(" ");
-
-                return (
-                  <span key={`${char}-${index}`} className={className}>
-                    {char}
-                  </span>
-                );
-              })}
-            </span>
-          </a>
+      <header className="fixed inset-x-0 top-0 z-50">
+        <div className="relative mx-auto flex w-full max-w-7xl items-center justify-end px-4 py-4 md:px-10 md:py-6">
+          <nav className="flex items-center gap-5 md:gap-8">
+            <a href="#experience" className="text-sm font-medium text-white/80 transition hover:text-white">
+              Experience
+            </a>
+            <a href="#projects" className="text-sm font-medium text-white/80 transition hover:text-white">
+              Projects
+            </a>
+            <a href="#contact" className="text-sm font-medium text-white/80 transition hover:text-white">
+              Contact
+            </a>
+          </nav>
         </div>
       </header>
 
