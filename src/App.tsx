@@ -21,9 +21,11 @@ const App = () => {
 
   return (
     <div className="relative min-h-screen bg-black text-zinc-100">
-      <header className="fixed inset-x-0 top-0 z-50">
-        <div className="relative mx-auto flex w-full max-w-7xl items-center justify-end px-4 py-4 md:px-10 md:py-6">
-          <nav className="hidden items-center gap-8 md:flex">
+      {/* Pinned to the page top (scrolls away), mirroring the brand's top-left
+          offset in the hero; h-6 matches the brand's md line height. */}
+      <header className="absolute right-6 top-6 z-50">
+        <div>
+          <nav className="hidden h-6 items-center gap-8 md:flex">
             <a href="#experience" className="text-sm font-medium text-white/80 transition hover:text-white">
               Experience
             </a>
