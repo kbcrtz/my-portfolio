@@ -15,7 +15,7 @@ export const portfolioData: PortfolioData = {
   location: "Tacoma, WA",
   oneLiner: "Designing products people *feel*",
   about: [
-    "Hey! I'm a third year Computer Science student at Pacific Lutheran University focused on building practical software that solves real problems.",
+    "Hey! I'm a senior Computer Science student at Pacific Lutheran University focused on building practical software that solves real problems.",
     "I grew up in Puyallup, which is where my roots are and where I first got into building things.",
     "These days I work in Seattle, where my focus is full-stack applications across React/React Native, TypeScript, Spring Boot, and PostgreSQL, with product-minded execution from architecture to deployment. I enjoy shipping user-ready experiences that balance clean engineering with measurable results.",
   ],
@@ -85,7 +85,7 @@ export const portfolioData: PortfolioData = {
       org: "White Pass Ski Patrol",
       role: "Software Engineer Intern",
       period: "May 2025 – Aug 2025",
-      location: "White Pass Ski Area, Lewis County, WA",
+      location: "Lewis County, WA",
       bullets: [
         "Designed and built an employee management system in React and TypeScript for 200+ patrollers, owning the UI end-to-end and reducing shift assignment time by 60%.",
         "Partnered with dispatchers to prototype responsive UI/UX workflows in Figma, then implemented reusable React components and interaction patterns from those designs.",
