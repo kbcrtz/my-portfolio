@@ -73,19 +73,19 @@ export const portfolioData: PortfolioData = {
     {
       org: "Proliance Surgeons",
       role: "Software Engineering & Applications Intern",
-      period: "Jun 2026 – Present",
+      period: "Jun 2026 – Sep 2026",
       location: "Seattle, WA",
       bullets: [
-        "Built Python automation scripts integrating with third-party healthcare APIs to streamline data ingestion across internal and patient-facing systems.",
-        "Queried and transformed data across SQL databases to support cross-system integration workflows and improve downstream data reliability.",
-        "Prototyped AI-powered workflow automations with Claude to reduce repetitive manual processing in operational pipelines.",
+        "Pioneered an AI-assisted analysis workflow for NextGen EHR clinical templates using Claude Code, mapping 5 linkage mechanisms across 7 MIPS/MVP templates in under an hour.",
+        "Built a PHP/ODBC web tool on IIS and SQL Server replacing hard-coded practice IDs in a PowerShell payment-import pipeline for no-code Wells Fargo to NextGen mapping updates.",
+        "Presented HIPAA-compliant generative AI guidelines to 100+ staff with a live demo; pitched IT leadership an 8-step Claude Code adoption runbook.",
       ],
     },
     {
-      org: "White Pass Ski Area",
+      org: "White Pass Ski Patrol",
       role: "Software Engineer Intern",
       period: "May 2025 – Aug 2025",
-      location: "Lewis County, WA",
+      location: "White Pass Ski Area, Lewis County, WA",
       bullets: [
         "Designed and built an employee management system in React and TypeScript for 200+ patrollers, owning the UI end-to-end and reducing shift assignment time by 60%.",
         "Partnered with dispatchers to prototype responsive UI/UX workflows in Figma, then implemented reusable React components and interaction patterns from those designs.",
@@ -96,7 +96,7 @@ export const portfolioData: PortfolioData = {
   projects: [
     {
       name: "Gear Fitness",
-      summary: "Production fitness app with 100+ users",
+      summary: "Production fitness app with 500+ users",
       image: "/images/gear-fitness.png",
       stack: [
         "React Native",
@@ -112,10 +112,28 @@ export const portfolioData: PortfolioData = {
         "https://apps.apple.com/us/app/gear-workout-tracker-gym-log/id6756771550",
       repository: "https://github.com/gear-fitness/gear-fitness-app",
       bullets: [
-        "Designed and built a social fitness app end-to-end, shipped to the App Store with 100+ users; owned product design, a monochrome design system, and the full React Native frontend.",
+        "Designed and built a social fitness app end-to-end, growing to 500+ Apple App Store users; owned product design, a monochrome design system, and the full React Native frontend.",
         "Implemented workout tracking, social features, and in-app fitness guidance, including a muscle-activation diagram generator that renders platform-optimized workout visuals for users to share across multiple social channels.",
         "Architected a Spring Boot backend with 15+ REST endpoints and a PostgreSQL schema of 12+ normalized tables, keeping analytics and feed queries under 100ms.",
         "Deployed the app on AWS Elastic Beanstalk with Docker and GitHub Actions CI/CD, implementing Google OAuth2/JWT authentication and pre-signed S3 uploads while cutting deployment time by 70%.",
+      ],
+    },
+    {
+      name: "Silo",
+      summary: "AI styling app built at DubHacks",
+      repository: "https://github.com/kbcrtz/silo",
+      stack: [
+        "React Native",
+        "Expo",
+        "TypeScript",
+        "Skia",
+        "Gemini API",
+        "PostgreSQL",
+        "Shopify",
+        "Railway",
+      ],
+      bullets: [
+        "Built a full-stack AI styling iOS app at University of Washington's DubHacks that finds a user's seasonal palette from a selfie via Gemini and ranks live Shopify Global Catalog listings by CIE Lab ΔE color fit.",
       ],
     },
     // Hidden from the site for now — uncomment to bring back.
