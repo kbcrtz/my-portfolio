@@ -361,6 +361,13 @@ html.light .globeMapOverlay .leaflet-container {
   background: #f8fafc;
 }
 
+/* CARTO restyled dark_all in 2026 with blue-slate water. Desaturate and dim it
+   back to the original neutral black/grey Dark Matter look (land ~#090909,
+   water ~#262626). */
+.cartoDarkTiles {
+  filter: grayscale(1) brightness(0.75);
+}
+
 /* Tile credit (required by CARTO/OSM): kept legible but quiet. */
 .globeMapOverlay .leaflet-control-attribution {
   margin: 0 8px 6px 0;

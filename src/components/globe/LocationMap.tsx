@@ -82,6 +82,7 @@ const LocationMap = ({ location, isDark, reducedMotion }: LocationMapProps) => {
             isDark ? "dark_all" : "light_all"
           }/{z}/{x}/{y}{r}.png?key=${CARTO_KEY}`}
           attribution={CARTO_ATTRIBUTION}
+          className={isDark ? "cartoDarkTiles" : undefined}
           maxNativeZoom={18}
         />
       ) : (
