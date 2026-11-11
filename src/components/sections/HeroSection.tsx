@@ -138,7 +138,7 @@ const HeroSection = ({ name, title, oneLiner }: HeroSectionProps) => {
 
       {/* Scroll cue. Bounce lives on the inner element so it doesn't fight the
           centering translate on the outer one. */}
-      <div className="absolute bottom-1 left-1/2 z-10 -translate-x-1/2">
+      <div className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2">
         <a
           href="#stack"
           aria-label="Scroll to my toolkit"
@@ -146,9 +146,8 @@ const HeroSection = ({ name, title, oneLiner }: HeroSectionProps) => {
             event.preventDefault();
             document.getElementById("stack")?.scrollIntoView({ behavior: "smooth", block: "start" });
           }}
-          className="flex animate-[bounce_2.8s_ease-in-out_infinite] flex-col items-center gap-0.5 p-2 text-white/50 transition hover:text-white"
+          className="flex animate-[bounce_2.8s_ease-in-out_infinite] items-center px-6 pb-3 pt-6 text-white/50 transition hover:text-white"
         >
-          <WideChevron />
           <WideChevron />
         </a>
       </div>

@@ -23,7 +23,7 @@ const App = () => {
     <div className="relative min-h-screen bg-black text-zinc-100">
       <header className="fixed inset-x-0 top-0 z-50">
         <div className="relative mx-auto flex w-full max-w-7xl items-center justify-end px-4 py-4 md:px-10 md:py-6">
-          <nav className="flex items-center gap-5 md:gap-8">
+          <nav className="hidden items-center gap-8 md:flex">
             <a href="#experience" className="text-sm font-medium text-white/80 transition hover:text-white">
               Experience
             </a>
